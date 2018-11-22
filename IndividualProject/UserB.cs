@@ -6,15 +6,11 @@ using System.Threading.Tasks;
 
 namespace IndividualProject
 {
-    class UserB:User
+    class UserB:UserA 
     {
-        public UserB(string name)
+        public UserB(string name) : base (name)
         {
             Name = name;
-        }
-        public void ViewDatabase()
-        {
-            Console.WriteLine("I am userb and i can view database columns");
         }
         public void WriteDatabase()
         {

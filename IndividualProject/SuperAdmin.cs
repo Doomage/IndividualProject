@@ -52,6 +52,16 @@ namespace IndividualProject
             string name = Console.ReadLine();
             admin = new Admin(name);
         }
+        public void dafawfaw()
+        {
+            usera.ViewDatabase();
+            userb.ViewDatabase();
+            userb.WriteDatabase();
+            userc.DeleteDatabaseColumn();
+            userc.ViewDatabase();
+            userc.WriteDatabase();
+            
+        }
 
 
 

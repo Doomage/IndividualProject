@@ -14,7 +14,7 @@ namespace IndividualProject
         }
         public void WriteDatabase()
         {
-            Console.WriteLine("I am userB and i can Write in Database");
+            Console.WriteLine($"I am {Name} and i can Write in Database");
         }
     }
 }

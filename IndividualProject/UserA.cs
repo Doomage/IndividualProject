@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IndividualProject
 {
-    class UserA:User
+    class UserA:AbstractUser
     {
         public UserA(string name)
         {
@@ -14,7 +14,7 @@ namespace IndividualProject
         }
         public void ViewDatabase()
         {
-            Console.WriteLine($"i am UserA {Name} and i can view database columns");
+            Console.WriteLine($"i am {Name} and i can view database columns");
         }
     }
 }

@@ -47,7 +47,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SuperAdmin.cs" />
     <Compile Include="AbstractUser.cs" />
-    <Compile Include="User.cs" />
     <Compile Include="UserA.cs" />
     <Compile Include="UserB.cs" />
     <Compile Include="UserC.cs" />

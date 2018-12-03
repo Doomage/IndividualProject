@@ -16,7 +16,7 @@ namespace IndividualProject
 
         public void DeleteDatabaseColumn()
         {
-            Console.WriteLine("I am userC and i can delete Database");
+            Console.WriteLine($"I am {Name} and i can delete Database");
         }
     }
 }

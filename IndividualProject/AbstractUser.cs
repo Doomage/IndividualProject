@@ -8,8 +8,9 @@ namespace IndividualProject
 {
     abstract class AbstractUser
     {
-        List<AbstractUser> UserList;
+        
         public string Name { get; set; }
+        public enum userenum { usera =1  , userb =2 , userc =3 , admin =4 }
 
     }
 }

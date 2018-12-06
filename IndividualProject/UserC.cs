@@ -8,15 +8,17 @@ namespace IndividualProject
 {
     class UserC:UserB
     {
-
+        userenum userenum;
         public UserC(string name) : base(name)
         {
             Name = name;
+            userenum = userenum.userb;
         }
 
         public void DeleteDatabaseColumn()
         {
             Console.WriteLine($"I am {Name} and i can delete Database");
+
         }
     }
 }

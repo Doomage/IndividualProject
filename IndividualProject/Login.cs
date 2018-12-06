@@ -4,18 +4,19 @@ using System.Linq;
 
 namespace IndividualProject
 {
-    public class Login
+    class Login
     {
-        private Dictionary<string, string> Credentials = new Dictionary<string, string>();
+       private Dictionary<string, string> Credentials = new Dictionary<string, string>();
+        string name { get; set; }
+        string psw { get; set; }
 
-        public Login(string name , string psw)
+        public Login(string name, string psw)
         {
-            Credentials.Add(name,psw);
-          
+            Credentials.Add(name, psw);
         }
-        public bool ValidateCredentials(string username, string password)
+        public  bool ValidateCredentials()
         {
-            return Credentials.Any(entry => entry.Key == username && entry.Value == password);
+            return Credentials.Any(entry => entry.Key == name && entry.Value == psw);
         }
 
     }

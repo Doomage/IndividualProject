@@ -9,36 +9,38 @@ namespace IndividualProject
     class Program
     {
 
-        static private Login auth = new Login();
+        
 
         static void Main(string[] args)
-        { 
-            Console.WriteLine("Enter username : ");
-            var username = Console.ReadLine();
-            Console.WriteLine("Enter password : ");
-            var password = Console.ReadLine();
+        {
+            do
+            {
+                
 
-            var isvalid = auth.ValidateCredentials(username, password);
-            if (isvalid == true)
-            {
-                Console.WriteLine("u are authenticated! ");
-            }
-            else
-            {
-                Console.WriteLine("Do u want to create an account? y/n");
-                var answer = Console.ReadLine();
-                if (answer == "y")
+                Console.WriteLine("Enter username : ");
+                var username = Console.ReadLine();
+                Console.WriteLine("Enter password : ");
+                var password = Console.ReadLine();
+                Login auth = new Login(username,password);
+
+                var isvalid = auth.ValidateCredentials();
+
+                if (isvalid == true)
                 {
-                    SuperAdmin.Creation();
+                    Console.WriteLine("You are authenticated! ");
+                    Console.ReadKey();
                 }
+                else
+                {
+                    Console.WriteLine("Do u want to create an account? y/n");
+                    var answer = Console.ReadLine();
+                    if (answer == "y")
+                    {
+                        SuperAdmin.Creation();
+                    }
 
-            }
-            //Console.WriteLine("Your are{0} authenticated!", isvalid ? string.Empty : " NOT");
-            //Console.ReadLine();
-
-            
-            //superadmin.Creation();
-
+                }
+            } while (true);
 
         }
     }

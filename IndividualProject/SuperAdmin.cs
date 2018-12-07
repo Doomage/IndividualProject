@@ -21,6 +21,7 @@ namespace IndividualProject
             string psw = Console.ReadLine();
 
             var login = new Login(name,psw);
+            Login.ValidateCredentials(name, psw);
         }
         
     }

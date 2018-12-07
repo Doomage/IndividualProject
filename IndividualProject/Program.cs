@@ -8,38 +8,26 @@ namespace IndividualProject
 
     class Program
     {
-
-        
-
         static void Main(string[] args)
         {
             do
             {
-                
-
-                Console.WriteLine("Enter username : ");
-                var username = Console.ReadLine();
-                Console.WriteLine("Enter password : ");
-                var password = Console.ReadLine();
-                Login auth = new Login(username,password);
-
-                var isvalid = auth.ValidateCredentials();
-
-                if (isvalid == true)
+                Console.WriteLine("Give me the username");
+                string name = Console.ReadLine();
+                Console.WriteLine("Give me your Password");
+                string psw = Console.ReadLine();
+                if (Login.ValidateCredentials(name,psw)==true)
                 {
-                    Console.WriteLine("You are authenticated! ");
-                    Console.ReadKey();
+                    Console.WriteLine("You have login");
+                    Console.ReadLine();
                 }
                 else
                 {
-                    Console.WriteLine("Do u want to create an account? y/n");
-                    var answer = Console.ReadLine();
-                    if (answer == "y")
-                    {
-                        SuperAdmin.Creation();
-                    }
+                    Console.WriteLine("You need to create an account.");
+                    SuperAdmin.Creation();
 
                 }
+
             } while (true);
 
         }

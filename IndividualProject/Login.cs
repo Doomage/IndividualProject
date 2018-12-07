@@ -4,17 +4,15 @@ using System.Linq;
 
 namespace IndividualProject
 {
-    class Login
+    class Login:DictionaryForUsers
     {
-       private Dictionary<string, string> Credentials = new Dictionary<string, string>();
-        string name { get; set; }
-        string psw { get; set; }
-
-        public Login(string name, string psw)
+        public Login(string name, string psw) : base(name, psw)
         {
-            Credentials.Add(name, psw);
+
         }
-        public  bool ValidateCredentials()
+
+
+        public static bool ValidateCredentials(string name, string psw)
         {
             return Credentials.Any(entry => entry.Key == name && entry.Value == psw);
         }

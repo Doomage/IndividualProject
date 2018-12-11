@@ -10,6 +10,7 @@ namespace IndividualProject
     {
         static void Main(string[] args)
         {
+            SuperAdmin Sadmin = new SuperAdmin();
 
             Console.WriteLine("give me the username");
             string name = Console.ReadLine();
@@ -17,21 +18,60 @@ namespace IndividualProject
             Console.WriteLine("give me your password");
             string psw = Console.ReadLine();
 
-            DatabaseConnection.Validate(name, psw);
+            if (DatabaseConnection.Validate(name,psw)== true)
+            {
+                Console.WriteLine("You login");
+            }
+            else
+            {
+                string password;
+                Console.WriteLine("You have to create an Account to log in");
+                Console.WriteLine("Do u want to create an account? y/n");
+                string answer = Console.ReadLine();
+                switch (answer)
+                {
 
-            ////an uparxei to validate pes oti exeis kanei login
-            //if (Login.validatecredentials(name, psw) == true)
-            //{
-            //    console.writeline("you have login");
-            //    console.readline();
-            //}
-            //else //zita new
-            //{
-            //    console.writeline("you need to create an account.");
-            //    superadmin.creation();
+                    case "y":
+                                         
+                            Console.WriteLine("Give me Username you want to Create");
+                            string Name = Console.ReadLine();                            
+                            if (DatabaseConnection.ValidateUsername(Name) == true)
+                            {
+                                do
+                                {
+                                    Console.WriteLine("You have to choose an other username");
+                                    Name = Console.ReadLine();                                   
+                                } while (DatabaseConnection.ValidateUsername(Name) == true);
+                            }                            
+                            Console.WriteLine("Give me your password");
+                            password = Console.ReadLine();
+                            if (password.Length == 0)
+                            {
+                                do
+                                {
+                                    Console.WriteLine("You cant have a passworld with 0 letters");
+                                    Console.WriteLine("Give me your password");
+                                    password = Console.ReadLine();
 
-            //}
-            //DatabaseConnection.Validate("admin");
+                                } while (password.Length == 0);                              
+                            }
+                            Sadmin.Addaccount(Name, password);                           
+                        break;
+                    case "n":
+                    default:
+                        Console.WriteLine("Bye bye");
+                        break;
+
+                    
+
+
+
+
+                }
+                
+            }
+
+            
             Console.ReadKey();
             
 

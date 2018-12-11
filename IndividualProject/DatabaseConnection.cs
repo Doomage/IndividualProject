@@ -8,16 +8,16 @@ using System.Data;
 
 namespace IndividualProject
 {
-    
+
 
     class DatabaseConnection
     {
-        private static string connectionstring = "Server= DESKTOP-A9G0RJD\\SQLEXPRESS; Database= IndividualProject;Integrated Security = SSPI;";
+        private static string connectionstring = "Server= DESKTOP-OJEQUAD\\SQLEXPRESS; Database= IndividualProject;Integrated Security = SSPI;";
 
         public DatabaseConnection()
-        {       
+        {
         }
-        
+
         public void SelectAccountTable()
         {
             var dbcon = new SqlConnection(connectionstring);
@@ -37,11 +37,11 @@ namespace IndividualProject
                         Console.WriteLine($" Username : {username}, Password : {Password}, PersonAccess : {PersonAccess}, PersonID : {PErsonid}");
                     }
                 }
-            
+
             }
         }
 
-        public void AddAccount(string username,string psw,int PersonAccess)
+        public void AddAccount(string username, string psw, int PersonAccess)
         {
             var dbcon = new SqlConnection(connectionstring);
             using (dbcon)
@@ -64,35 +64,63 @@ namespace IndividualProject
             using (dbcon)
             {
                 dbcon.Open();
-                var cmd = new SqlCommand("delete from Accounts where Username = '" + username+ "'", dbcon);
+                var cmd = new SqlCommand("delete from Accounts where Username = '" + username + "'", dbcon);
                 var affected = cmd.ExecuteNonQuery();
                 Console.WriteLine($"{affected} Affected rows");
             }
 
         }
 
-        public static void Validate(string name, string password)
+        public static bool Validate(string name, string password)
         {
             var dbcon = new SqlConnection(connectionstring);
             using (dbcon)
             {
                 dbcon.Open();
                 //TODO an auto gurisei true tote uparxei to psw else zita
-                var cmd = new SqlCommand("Get_Password", dbcon);
+                var cmd = new SqlCommand("Validate_Account", dbcon);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@Username",name);
-                cmd.Parameters.Add(new SqlParameter("@Password",SqlDbType.NVarChar)
+                cmd.Parameters.AddWithValue("@Username", name);
+                cmd.Parameters.AddWithValue("@Password", password);
+                if (cmd.ExecuteScalar().Equals(1))
                 {
-                     Direction = ParameterDirection.Output , Size =50
-                });
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
 
-                var affectedrows = cmd.ExecuteNonQuery();
-                
                 //Console.WriteLine(cmd.Parameters["@Password"].Value);
-               
+
             }
+
         }
 
+        public static bool ValidateUsername(string name)
+        {
+            var dbcon = new SqlConnection(connectionstring);
+            using (dbcon)
+            {
+                dbcon.Open();
+                //TODO an auto gurisei true tote uparxei to psw else zita
+                var cmd = new SqlCommand("Validate_Username", dbcon);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Username", name);
+                if (cmd.ExecuteScalar().Equals(1))
+                {
+                    return true;               
+                }
+                else
+                {
+                    return false;
+                }
+
+                //Console.WriteLine(cmd.Parameters["@Password"].Value);
+
+            }
+
+        }
     }
 }

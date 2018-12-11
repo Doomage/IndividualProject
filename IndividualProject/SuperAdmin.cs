@@ -8,32 +8,28 @@ namespace IndividualProject
 {
     class SuperAdmin : AbstractUser
     {        
-        public SuperAdmin(string name)
-        {
-            Name = name;
+        public SuperAdmin()
+        {   
             userlist = userenum.superadmin;
         }
 
         public void Addaccount(string name, string Psw , userenum userlist = userenum.userc )
         {
+            var dbcreate = new DatabaseConnection();
             switch (userlist)
             {
-                case userenum.admin:
-                    var bdcreate = new DatabaseConnection();
-                    bdcreate.AddAccount(name, Psw ,4 );
+                case userenum.admin:                   
+                    dbcreate.AddAccount(name, Psw ,4 );
                     break;
                 case userenum.userc:
-                default:
-                    var dabase = new DatabaseConnection();
-                    dabase.AddAccount(name, Psw, 3 );
+                default:                   
+                    dbcreate.AddAccount(name, Psw, 3 );
                     break;
-                case userenum.userb:
-                    var database = new DatabaseConnection();
-                    database.AddAccount(name, Psw, 2 );
+                case userenum.userb:                   
+                    dbcreate.AddAccount(name, Psw, 2 );
                     break;
-                case userenum.usera:
-                    var bddcreate = new DatabaseConnection();
-                    bddcreate.AddAccount(name, Psw, 1);
+                case userenum.usera:                    
+                    dbcreate.AddAccount(name, Psw, 1);
                     break;
             }
         }

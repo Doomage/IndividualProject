@@ -8,11 +8,11 @@ namespace IndividualProject
 {
     class UserA:AbstractUser
     {
-        userenum userenum;
+        
         public UserA(string name)
         {
             Name = name;
-            userenum = userenum.usera;
+            userlist = userenum.usera;
         }
         public void ViewDatabase()
         {

@@ -10,25 +10,32 @@ namespace IndividualProject
     {
         static void Main(string[] args)
         {
-            do
-            {
-                Console.WriteLine("Give me the username");
-                string name = Console.ReadLine();
-                Console.WriteLine("Give me your Password");
-                string psw = Console.ReadLine();
-                if (Login.ValidateCredentials(name,psw)==true)
-                {
-                    Console.WriteLine("You have login");
-                    Console.ReadLine();
-                }
-                else
-                {
-                    Console.WriteLine("You need to create an account.");
-                    SuperAdmin.Creation();
 
-                }
+            Console.WriteLine("give me the username");
+            string name = Console.ReadLine();
 
-            } while (true);
+            Console.WriteLine("give me your password");
+            string psw = Console.ReadLine();
+
+            DatabaseConnection.Validate(name, psw);
+
+            ////an uparxei to validate pes oti exeis kanei login
+            //if (Login.validatecredentials(name, psw) == true)
+            //{
+            //    console.writeline("you have login");
+            //    console.readline();
+            //}
+            //else //zita new
+            //{
+            //    console.writeline("you need to create an account.");
+            //    superadmin.creation();
+
+            //}
+            //DatabaseConnection.Validate("admin");
+            Console.ReadKey();
+            
+
+
 
         }
     }

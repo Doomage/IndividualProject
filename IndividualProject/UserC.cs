@@ -8,11 +8,11 @@ namespace IndividualProject
 {
     class UserC:UserB
     {
-        userenum userenum;
+        
         public UserC(string name) : base(name)
         {
             Name = name;
-            userenum = userenum.userb;
+            userlist = userenum.userc;
         }
 
         public void DeleteDatabaseColumn()

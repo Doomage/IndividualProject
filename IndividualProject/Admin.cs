@@ -10,9 +10,10 @@ namespace IndividualProject
     {
         userenum userenum;
 
-        public Admin(string name)
+        public Admin(string name,string psw)
         {
             Name = name;
+            Password = psw;
             userenum = userenum.admin;
         }
        

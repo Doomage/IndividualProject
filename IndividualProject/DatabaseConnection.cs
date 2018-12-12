@@ -71,7 +71,7 @@ namespace IndividualProject
 
         }
 
-        public static bool Validate(string name, string password)
+        public static bool ValidateAccount(string name, string password)
         {
             var dbcon = new SqlConnection(connectionstring);
             using (dbcon)

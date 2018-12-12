@@ -12,26 +12,45 @@ namespace IndividualProject
         {
         }
 
-        public static void CheckingUsername(string name)
+        public static string CheckingUsername()
         {
-            while(DatabaseConnection.ValidateUsername(name) == true)
+            Console.WriteLine("Give me Username you want to Create");
+            string Name = Console.ReadLine();
+
+            while (DatabaseConnection.ValidateUsername(Name) == true)
             {
                 Console.WriteLine("You have to choose an other username");
-                name = Console.ReadLine();
+                Name = Console.ReadLine();
             }
-                
-        }
-        public static void CheckingPassword(string psw)
-        {
-            while (psw.Length == 0)
-            {  
-                    Console.WriteLine("You cant have a passworld with 0 letters");
-                    Console.WriteLine("Give me your password");
-                    psw = Console.ReadLine(); 
-            }
+            return Name;
         }
 
-        
-        
+        public static string CheckingPassword()
+        {
+            Console.WriteLine("Give password :");
+            ConsoleKeyInfo key;
+
+            string psw = string.Empty;
+
+            do
+            {
+                key = Console.ReadKey(true);
+                if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
+                {
+                    psw += key.KeyChar;
+                    Console.Write("*");
+                }
+                else
+                {
+                    if (key.Key == ConsoleKey.Backspace && psw.Length !=0)
+                    {
+                        psw = psw.Substring(1, psw.Length - 1);
+                        Console.WriteLine("\b");
+                    }
+                }              
+            } while (key.Key != ConsoleKey.Enter || psw.Length==0);
+            Console.WriteLine("\n");
+            return psw;
+        }
     }
 }

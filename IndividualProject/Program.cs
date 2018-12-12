@@ -33,29 +33,22 @@ namespace IndividualProject
 
                     case "y":
                                          
-                            Console.WriteLine("Give me Username you want to Create");
-                            string Name = Console.ReadLine();                            
-                            if (DatabaseConnection.ValidateUsername(Name) == true)
+                        Console.WriteLine("Give me Username you want to Create");
+                        string Name = Console.ReadLine();
+                        Login.CheckingUsername(Name);                           
+                        Console.WriteLine("Give me your password");
+                        password = Console.ReadLine();
+                        if (password.Length == 0)
+                        {
+                            do
                             {
-                                do
-                                {
-                                    Console.WriteLine("You have to choose an other username");
-                                    Name = Console.ReadLine();                                   
-                                } while (DatabaseConnection.ValidateUsername(Name) == true);
-                            }                            
-                            Console.WriteLine("Give me your password");
-                            password = Console.ReadLine();
-                            if (password.Length == 0)
-                            {
-                                do
-                                {
-                                    Console.WriteLine("You cant have a passworld with 0 letters");
-                                    Console.WriteLine("Give me your password");
-                                    password = Console.ReadLine();
+                                Console.WriteLine("You cant have a passworld with 0 letters");
+                                Console.WriteLine("Give me your password");
+                                password = Console.ReadLine();
 
-                                } while (password.Length == 0);                              
-                            }
-                            Sadmin.Addaccount(Name, password);                           
+                            } while (password.Length == 0);
+                        }
+                        Sadmin.Addaccount(Name, password);                           
                         break;
                     case "n":
                     default:

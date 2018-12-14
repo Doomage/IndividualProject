@@ -9,9 +9,8 @@ namespace IndividualProject
     class UserA:AbstractUser
     {
         
-        public UserA(string name)
-        {
-            Name = name;
+        public UserA()
+        {            
             userlist = userenum.usera;
         }
         public void ViewDatabase()

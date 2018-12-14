@@ -13,7 +13,7 @@ namespace IndividualProject
         
         public string Name { get; set; }
         public userenum userlist { get; set; }
-        public string Password { get; set; }
+        
         
     }
 

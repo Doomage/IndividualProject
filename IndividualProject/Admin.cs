@@ -8,13 +8,11 @@ namespace IndividualProject
 {
     class Admin:AbstractUser
     {
-        userenum userenum;
+        
 
-        public Admin(string name,string psw)
-        {
-            Name = name;
-            Password = psw;
-            userenum = userenum.admin;
+        public Admin()
+        {           
+            userlist = userenum.admin;
         }
        
     }

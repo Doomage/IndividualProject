@@ -9,16 +9,14 @@ namespace IndividualProject
     class UserC:UserB
     {
         
-        public UserC(string name) : base(name)
-        {
-            Name = name;
+        public UserC() : base()
+        {           
             userlist = userenum.userc;
         }
 
         public void DeleteDatabaseColumn()
         {
             Console.WriteLine($"I am {Name} and i can delete Database");
-
         }
     }
 }

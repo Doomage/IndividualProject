@@ -47,8 +47,10 @@ namespace IndividualProject
             using (dbcon)
             {
                 dbcon.Open();
-                var cmd = new SqlCommand("insert into Accounts values(@username,@Password,@PersonAccess)", dbcon);
-                cmd.Parameters.AddWithValue("@username", username);
+                var cmd = new SqlCommand("InsertAccount", dbcon);
+                cmd.CommandType = CommandType.StoredProcedure;
+                
+                cmd.Parameters.AddWithValue("@Username", username);
                 cmd.Parameters.AddWithValue("@Password", psw);
                 cmd.Parameters.AddWithValue("@PersonAccess", PersonAccess);
 
@@ -121,6 +123,43 @@ namespace IndividualProject
 
             }
 
+        }
+
+        public static void AssignRoleBySuperAdmin(string name, int userlevel)
+        {
+            var dbcon = new SqlConnection(connectionstring);
+            using (dbcon)
+            {
+                dbcon.Open();
+                
+                var cmd = new SqlCommand("AssignRoleBySuperAdmin", dbcon);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@username", name);
+                cmd.Parameters.AddWithValue("@userlevel", userlevel);
+                var affected = cmd.ExecuteNonQuery();
+                Console.WriteLine($"{affected} Affected rows");
+            }
+        }
+
+        public static bool SelectUserlevelByUsername(string name)
+        {
+            var dbcon = new SqlConnection(connectionstring);
+            using (dbcon)
+            {
+                dbcon.Open();
+
+                var cmd = new SqlCommand("SelectUserlevelByUsername", dbcon);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@username", name);
+                if (cmd.ExecuteScalar().Equals(1))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
     }
 }

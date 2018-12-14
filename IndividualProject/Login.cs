@@ -14,7 +14,7 @@ namespace IndividualProject
 
         public static string CheckingUsername()
         {
-            Console.WriteLine("Give me Username you want to Create");
+            Console.Write("Give me Username you want to Create : ");
             string Name = Console.ReadLine();
 
             while (DatabaseConnection.ValidateUsername(Name) == true)
@@ -27,7 +27,7 @@ namespace IndividualProject
 
         public static string CheckingPassword()
         {
-            Console.WriteLine("Give password :");
+            Console.Write("Password : ");
             ConsoleKeyInfo key;
 
             string psw = string.Empty;
@@ -45,7 +45,10 @@ namespace IndividualProject
                     if (key.Key == ConsoleKey.Backspace && psw.Length !=0)
                     {
                         psw = psw.Substring(1, psw.Length - 1);
-                        Console.WriteLine("\b");
+                        Console.Write("\b");
+                        Console.Write(" ");
+                        Console.Write("\b");
+
                     }
                 }              
             } while (key.Key != ConsoleKey.Enter || psw.Length==0);

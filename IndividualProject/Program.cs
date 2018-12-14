@@ -10,14 +10,12 @@ namespace IndividualProject
     {
         static void Main(string[] args)
         {
+
             SuperAdmin Sadmin = new SuperAdmin();
-
-            Console.WriteLine("give me the username");
+            Console.Write("Username : ");
             string name = Console.ReadLine();
-
             if (DatabaseConnection.ValidateAccount(name, Login.CheckingPassword()) == true)
             {
-                
                 Console.WriteLine("You login");
             }
             else
@@ -27,7 +25,6 @@ namespace IndividualProject
                 string answer = Console.ReadLine();
                 switch (answer)
                 {
-
                     case "y":
                         Sadmin.Addaccount(Login.CheckingUsername(), Login.CheckingPassword());
                         break;
@@ -36,11 +33,8 @@ namespace IndividualProject
                         Console.WriteLine("Bye Bye");
                         break;
                 }
-
             }
             Console.ReadKey();
-
-        }
-        
+        }        
     }
 }

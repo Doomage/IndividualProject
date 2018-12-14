@@ -9,9 +9,8 @@ namespace IndividualProject
     class UserB:UserA 
     {
         
-        public UserB(string name) : base (name)
-        {
-            Name = name;
+        public UserB() : base ()
+        {           
             userlist = userenum.userb;
         }
         public void WriteDatabase()

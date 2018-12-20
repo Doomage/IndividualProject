@@ -14,16 +14,35 @@ namespace IndividualProject
 
         public static string CheckingUsername()
         {
+            Console.Clear();
             Console.Write("Give me Username you want to Create : ");
             string Name = Console.ReadLine();
 
             while (DatabaseConnection.ValidateUsername(Name) == true)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("You have to choose an other username");
+                Console.ResetColor();
                 Name = Console.ReadLine();
             }
             return Name;
         }
+
+        public static string CheckingUsernameForChangeAccess()
+        {
+            Console.Clear();
+            Console.Write("Give Username : ");
+            string Name = Console.ReadLine();
+            while (DatabaseConnection.ValidateUsername(Name) == false)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("You have to choose an other username");
+                Console.ResetColor();
+                Name = Console.ReadLine();
+            }
+            return Name;
+        }
+
 
         public static string CheckingPassword()
         {
@@ -42,7 +61,7 @@ namespace IndividualProject
                 }
                 else
                 {
-                    if (key.Key == ConsoleKey.Backspace && psw.Length !=0)
+                    if (key.Key == ConsoleKey.Backspace && psw.Length != 0)
                     {
                         psw = psw.Substring(1, psw.Length - 1);
                         Console.Write("\b");
@@ -50,10 +69,11 @@ namespace IndividualProject
                         Console.Write("\b");
 
                     }
-                }              
-            } while (key.Key != ConsoleKey.Enter || psw.Length==0);
+                }
+            } while (key.Key != ConsoleKey.Enter || psw.Length == 0);
             Console.WriteLine("\n");
             return psw;
         }
     }
 }
+

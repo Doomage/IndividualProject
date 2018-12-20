@@ -13,7 +13,7 @@ namespace IndividualProject
             userlist = userenum.superadmin;
         }
 
-        public void Addaccount(string name, string Psw , userenum userlist = userenum.userc )
+        public void CreateAccount(string name, string Psw , userenum userlist = userenum.usera )
         {
             var dbcreate = new DatabaseConnection();
             switch (userlist)
@@ -37,8 +37,32 @@ namespace IndividualProject
         public static void RemoveAccount()
         {
             var bdremove = new DatabaseConnection();
-            bdremove.RemoveAccount("name");
+            Console.Clear();
+            Console.Write("Write the username u want to ");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(" delete : ");
+            Console.ResetColor();
+            bdremove.RemoveAccount(Console.ReadLine());
+        }
+        
+        public void ViewUsersTable()
+        {
+            var bdview = new DatabaseConnection();
+            bdview.SelectAccountTable();
         }
 
+        public void ChangeUserAccess(string name,int userlevel)
+        {
+            var bd = new DatabaseConnection();
+            bd.AssignRoleBySuperAdmin(name, userlevel);
+        }
+
+        public void ChangeUserPassword(string name, string psw)
+
+        {
+            var db = new DatabaseConnection();
+            db.ChangeUserPassword(name, psw);
+
+        }
     }
 }

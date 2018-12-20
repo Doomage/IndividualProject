@@ -10,23 +10,60 @@ namespace IndividualProject
     {
         static void Main(string[] args)
         {
+            
 
             SuperAdmin Sadmin = new SuperAdmin();
             Console.Write("Username : ");
             string name = Console.ReadLine();
-            if (DatabaseConnection.ValidateAccount(name, Login.CheckingPassword()) == true)
+            var psw = Login.CheckingPassword();
+            if (DatabaseConnection.ValidateAccount(name, psw))
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("You login");
+                Console.ResetColor();
+                var UserAccess = DatabaseConnection.GetUserAccess(name, psw);
+                switch (UserAccess)
+                {
+                    case 5:
+                        {
+                            Menu.MenuSuperAdmin();
+                        }
+                        break;
+                    case 4:
+                        {
+                            Menu.MenuAdmin();
+                        }
+                        break;
+                    case 3:
+                        {
+                            Menu.MenuUserC();
+                        }
+                        break;
+                    case 2:
+                        {
+                            Menu.MenuUserB();
+                        }
+                        break;
+                    case 1:
+                    default:
+                        {
+                            Menu.MenuUserA();
+                        }
+                        break;
+                }
             }
             else
             {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("You have to create an Account to log in");
+                Console.ResetColor();
                 Console.WriteLine("Do u want to create an account? y/n");
                 string answer = Console.ReadLine();
                 switch (answer)
                 {
                     case "y":
-                        Sadmin.Addaccount(Login.CheckingUsername(), Login.CheckingPassword());
+                        Sadmin.CreateAccount(Login.CheckingUsername(), Login.CheckingPassword());
                         break;
                     case "n":
                     default:

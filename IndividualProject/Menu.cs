@@ -43,15 +43,18 @@ namespace IndividualProject
                         }
                         break;
                     case "2":
-                        int UserAccess;
+                        int UserAccess;                       
                         try
                         {
-                            var username = Login.CheckingUsernameForChangeAccess();                          
+                            var username = Login.CheckingUsernameForChangeAccess();
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.WriteLine($"User {username} has level { DatabaseConnection.SelectUserlevelByUsername(username)} Access ");
+                            Console.ResetColor();
+                            Console.WriteLine("Give Access level u want to grand");
                             Console.WriteLine("1.UserA");
                             Console.WriteLine("2.UserB");
                             Console.WriteLine("3.UserC");
-                            Console.WriteLine("4.Admin");
-                            Console.WriteLine("Give Access level u want to grand");
+                            Console.WriteLine("4.Admin");           
                             do
                             {
                                 Console.WriteLine("U have to pick between 1 and 4");
@@ -65,6 +68,15 @@ namespace IndividualProject
                         }
                         break;
                     case "3":
+                        try
+                        {
+                            Console.Clear();
+                            SuperAdmin.ViewUsersTable();
+                        }
+                        catch(Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
                         break;
                     case "4":
                         try
@@ -98,14 +110,29 @@ namespace IndividualProject
         public static void MenuAdmin()
         {
             var Admin = new Admin();
-            Console.Clear();
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("----------Admin Menu----------");
-            Console.ResetColor();
-            Console.WriteLine();
-            Console.WriteLine("1.Add User");
-            Console.WriteLine("2.Change User Access");
+            bool check = true;
+            do
+            {
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.DarkGray;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("----------Admin Menu----------");
+                Console.ResetColor();
+                Console.WriteLine();
+                Console.WriteLine("1.Add User");
+                Console.WriteLine("2.Change User Access");
+                switch (Console.ReadLine())
+                {
+                    case "1":
+                        break;
+                    case "2":
+                        break;
+                    case "0":
+                    default:
+                        check = false;
+                        break;
+                }
+            } while (check == true);
         }
         public static void MenuUserA()
         {

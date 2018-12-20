@@ -31,10 +31,17 @@ namespace IndividualProject
                     {
                         var username = reader[0];
                         var PersonAccess = reader[1];
-                        Console.WriteLine($" Username : {username}, PersonAccess : {PersonAccess}");
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        Console.Write("Username : ");
+                        Console.ResetColor();
+                        Console.Write(username);
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        Console.Write(" Access : ");
+                        Console.ResetColor();
+                        Console.Write(PersonAccess+"\n");                       
                     }
                 }
-
+                Console.ReadKey();
             }
         }
 
@@ -139,7 +146,7 @@ namespace IndividualProject
             }
         }
 
-        public static bool SelectUserlevelByUsername(string name)
+        public static int SelectUserlevelByUsername(string name)
         {
             var dbcon = new SqlConnection(connectionstring);
             using (dbcon)
@@ -149,14 +156,7 @@ namespace IndividualProject
                 var cmd = new SqlCommand("SelectUserlevelByUsername", dbcon);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@username", name);
-                if (cmd.ExecuteScalar().Equals(1))
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return Convert.ToInt32(cmd.ExecuteScalar());
             }
         }
 

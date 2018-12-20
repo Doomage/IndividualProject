@@ -36,7 +36,7 @@ namespace IndividualProject
             while (DatabaseConnection.ValidateUsername(Name) == false)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("You have to choose an other username");
+                Console.Write("You have to choose an other username : ");
                 Console.ResetColor();
                 Name = Console.ReadLine();
             }

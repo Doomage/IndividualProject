@@ -5,73 +5,74 @@ using System.Linq;
 
 namespace IndividualProject
 {
-
     class Program
     {
         static void Main(string[] args)
         {
-            
-
+            Console.Title = "Project Chat";
             SuperAdmin Sadmin = new SuperAdmin();
-            Console.Write("Username : ");
-            string name = Console.ReadLine();
-            var psw = Login.CheckingPassword();
-            if (DatabaseConnection.ValidateAccount(name, psw))
+            var check = true;
+            Login.ApplicationWelcomeMenu();
+            do
             {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("You login");
-                Console.ResetColor();
-                var UserAccess = DatabaseConnection.GetUserAccess(name, psw);
-                switch (UserAccess)
+                Console.Clear();               
+                Console.Write("Username : ");
+                string name = Console.ReadLine();
+                var psw = Login.CheckingPassword();
+                if (DatabaseConnection.ValidateAccount(name, psw))
                 {
-                    case 5:
-                        {
-                            Menu.MenuSuperAdmin();
-                        }
-                        break;
-                    case 4:
-                        {
-                            Menu.MenuAdmin();
-                        }
-                        break;
-                    case 3:
-                        {
-                            Menu.MenuUserC();
-                        }
-                        break;
-                    case 2:
-                        {
-                            Menu.MenuUserB();
-                        }
-                        break;
-                    case 1:
-                    default:
-                        {
-                            Menu.MenuUserA();
-                        }
-                        break;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("You login");
+                    Console.ReadKey();
+                    Console.ResetColor();
+                    var UserAccess = DatabaseConnection.GetUserAccess(name, psw);
+                    switch (UserAccess)
+                    {
+                        case 4:
+                            {
+                                Menu.MenuSuperAdmin();
+                            }
+                            break;
+                        case 3:
+                            {
+                                Menu.MenuUserC();
+                            }
+                            break;
+                        case 2:
+                            {
+                                Menu.MenuUserB();
+                            }
+                            break;
+                        case 1:
+                        default:
+                            {
+                                Menu.MenuUserA();
+                            }
+                            break;
+                    }
                 }
-            }
-            else
-            {
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("You have to create an Account to log in");
-                Console.ResetColor();
-                Console.WriteLine("Do u want to create an account? y/n");
-                string answer = Console.ReadLine();
-                switch (answer)
+                else
                 {
-                    case "y":
-                        Sadmin.CreateAccount(Login.CheckingUsername(), Login.CheckingPassword());
-                        break;
-                    case "n":
-                    default:
-                        Console.WriteLine("Bye Bye");
-                        break;
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("You have to create an Account to log in");
+                    Console.ResetColor();
+                    Console.WriteLine("Do u want to create an account? y/n");
+                    string answer = Console.ReadLine();
+                    switch (answer)
+                    {
+                        case "y":
+                            Sadmin.CreateAccount(Login.CheckingUsername(), Login.CheckingPassword());
+                            break;
+                        case "n":
+                        default:
+                            Console.WriteLine("Bye Bye");
+                            check = false;
+                            break;
+                    }
                 }
-            }
-            Console.ReadKey();
-        }        
+                Console.ReadKey();
+            } while (check == true);
+        }
     }
 }

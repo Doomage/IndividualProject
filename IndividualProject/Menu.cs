@@ -53,11 +53,10 @@ namespace IndividualProject
                             Console.WriteLine("Give Access level u want to grand");
                             Console.WriteLine("1.UserA");
                             Console.WriteLine("2.UserB");
-                            Console.WriteLine("3.UserC");
-                            Console.WriteLine("4.Admin");           
+                            Console.WriteLine("3.UserC");          
                             do
                             {
-                                Console.WriteLine("U have to pick between 1 and 4");
+                                Console.WriteLine("U have to pick between 1 and 3");
                                 UserAccess = int.Parse(Console.ReadLine());
                             } while (UserAccess < 1 || UserAccess > 4);
                             SuperAdmin.ChangeUserAccess(username, UserAccess);
@@ -107,33 +106,33 @@ namespace IndividualProject
                 }
             } while (check == true);
         }
-        public static void MenuAdmin()
-        {
-            var Admin = new Admin();
-            bool check = true;
-            do
-            {
-                Console.Clear();
-                Console.BackgroundColor = ConsoleColor.DarkGray;
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("----------Admin Menu----------");
-                Console.ResetColor();
-                Console.WriteLine();
-                Console.WriteLine("1.Add User");
-                Console.WriteLine("2.Change User Access");
-                switch (Console.ReadLine())
-                {
-                    case "1":
-                        break;
-                    case "2":
-                        break;
-                    case "0":
-                    default:
-                        check = false;
-                        break;
-                }
-            } while (check == true);
-        }
+        //public static void MenuAdmin()
+        //{
+        //    var Admin = new Admin();
+        //    bool check = true;
+        //    do
+        //    {
+        //        Console.Clear();
+        //        Console.BackgroundColor = ConsoleColor.DarkGray;
+        //        Console.ForegroundColor = ConsoleColor.Red;
+        //        Console.WriteLine("----------Admin Menu----------");
+        //        Console.ResetColor();
+        //        Console.WriteLine();
+        //        Console.WriteLine("1.Add User");
+        //        Console.WriteLine("2.Change User Access");
+        //        switch (Console.ReadLine())
+        //        {
+        //            case "1":
+        //                break;
+        //            case "2":
+        //                break;
+        //            case "0":
+        //            default:
+        //                check = false;
+        //                break;
+        //        }
+        //    } while (check == true);
+        //}
         public static void MenuUserA()
         {
             var userA = new UserA();

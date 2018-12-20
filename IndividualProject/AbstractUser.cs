@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IndividualProject
 {
-    public enum userenum { usera = 1, userb = 2, userc = 3, admin = 4,superadmin = 5 }
+    public enum userenum {usera = 1, userb = 2, userc = 3, superadmin = 4}
 
     abstract class AbstractUser
     {

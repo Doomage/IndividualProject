@@ -18,9 +18,6 @@ namespace IndividualProject
             var dbcreate = new DatabaseConnection();
             switch (userlist)
             {
-                case userenum.admin:                   
-                    dbcreate.AddAccount(name, Psw ,4 );
-                    break;
                 case userenum.userc:
                 default:                   
                     dbcreate.AddAccount(name, Psw, 3 );

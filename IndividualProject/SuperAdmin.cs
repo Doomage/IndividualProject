@@ -13,6 +13,24 @@ namespace IndividualProject
             userlist = userenum.superadmin;
         }
 
+        public string SuperAdminMenu()
+        {
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("----------Superadmin Menu----------");
+            Console.ResetColor();
+            Console.WriteLine();
+            Console.WriteLine("1. Create new User");
+            Console.WriteLine("2. Update User Access");
+            Console.WriteLine("3. View Users and each Access");
+            Console.WriteLine("4. Delete a User");
+            Console.WriteLine("5. Update User password");
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("0.Exit");
+            Console.ResetColor();
+            return Console.ReadLine();
+        }
         public void CreateAccount(string name, string Psw , userenum userlist = userenum.usera )
         {
             var dbcreate = new DatabaseConnection();

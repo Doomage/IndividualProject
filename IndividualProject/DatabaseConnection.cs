@@ -195,5 +195,59 @@ namespace IndividualProject
                 Console.ReadKey();
             }
         }
+
+        public void AddMessage(string Sendername,string ReceiverName,string Message)
+        {
+            var dbcon = new SqlConnection(connectionstring);
+            using (dbcon)
+            {
+                dbcon.Open();
+                var cmd = new SqlCommand("AddMessage", dbcon);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@sender", Sendername);
+                cmd.Parameters.AddWithValue("@receiver", ReceiverName);
+                cmd.Parameters.AddWithValue("@message", Message);
+
+                var affected = cmd.ExecuteNonQuery();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"{affected} Affected rows");
+                Console.ResetColor();
+                Console.ReadKey();
+            }
+        }
+
+
+        public List<Messages> ReadMessages(string Sendername, string ReceiverName)
+        {
+            List<Messages> messages = new List<Messages>();
+            var dbcon = new SqlConnection(connectionstring);
+            using (dbcon)
+            {
+                dbcon.Open();
+                var cmd = new SqlCommand("ViewMessage", dbcon);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@sendername", Sendername);
+                cmd.Parameters.AddWithValue("@receivername", ReceiverName);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var datetime = reader[0];
+                        var message = reader[1];
+                        messages.Add(new Messages()
+                        {
+                            Message = Convert.ToString(message),
+                            TimeSent = Convert.ToDateTime(datetime),
+                            SenderName = Sendername,
+                            ReceiverName = ReceiverName                           
+                        });
+                    }
+                }
+                return messages;
+            }
+        }
+     
     }
 }

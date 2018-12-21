@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +9,7 @@ namespace IndividualProject
     public class Menu
     {
         DatabaseConnection db = new DatabaseConnection();
+        
 
         public static void MenuSuperAdmin()
         {
@@ -16,25 +17,11 @@ namespace IndividualProject
             bool check = true;
             do
             {
-                Console.Clear();
-                Console.BackgroundColor = ConsoleColor.DarkGray;
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("----------Superadmin Menu----------");
-                Console.ResetColor();
-                Console.WriteLine();
-                Console.WriteLine("1. Create new User");
-                Console.WriteLine("2. Update User Access");
-                Console.WriteLine("3. View Users and each Access");
-                Console.WriteLine("4. Delete a User");
-                Console.WriteLine("5. Update User password");
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine("0.Exit");
-                Console.ResetColor();
-                switch (Console.ReadLine())
+                switch (SuperAdmin.SuperAdminMenu())
                 {
                     case "1":
                         try
-                        {                           
+                        {
                             SuperAdmin.CreateAccount(Login.CheckingUsername(), Login.CheckingPassword());
                         }
                         catch (Exception e)
@@ -43,25 +30,29 @@ namespace IndividualProject
                         }
                         break;
                     case "2":
-                        int UserAccess;                       
+                        int UserAccess;
                         try
                         {
-                            var username = Login.CheckingUsernameForChangeAccess();
+                            Console.Clear();
+                            Console.Write("Give Username : ");
+                            string Name = Console.ReadLine();
+                            var username = Login.CheckingUsernameForChangeAccess(Name);
                             Console.ForegroundColor = ConsoleColor.Blue;
                             Console.WriteLine($"User {username} has level { DatabaseConnection.SelectUserlevelByUsername(username)} Access ");
                             Console.ResetColor();
                             Console.WriteLine("Give Access level u want to grand");
-                            Console.WriteLine("1.UserA");
-                            Console.WriteLine("2.UserB");
-                            Console.WriteLine("3.UserC");          
+                            Console.WriteLine("1.User");
+                            Console.WriteLine("2.UserA");
+                            Console.WriteLine("3.UserB");
+                            Console.WriteLine("4.UserC");
                             do
                             {
-                                Console.WriteLine("U have to pick between 1 and 3");
+                                Console.WriteLine("U have to pick between 1 and 4");
                                 UserAccess = int.Parse(Console.ReadLine());
                             } while (UserAccess < 1 || UserAccess > 4);
                             SuperAdmin.ChangeUserAccess(username, UserAccess);
                         }
-                        catch(Exception e)
+                        catch (Exception e)
                         {
                             Console.WriteLine(e.Message);
                         }
@@ -72,7 +63,7 @@ namespace IndividualProject
                             Console.Clear();
                             SuperAdmin.ViewUsersTable();
                         }
-                        catch(Exception e)
+                        catch (Exception e)
                         {
                             Console.WriteLine(e.Message);
                         }
@@ -90,7 +81,9 @@ namespace IndividualProject
                     case "5":
                         try
                         {
-                            var username = Login.CheckingUsernameForChangeAccess();
+                            Console.Clear();
+                            Console.Write("Give Username you want to change the psw : ");
+                            var username = Login.CheckingUsernameForChangeAccess(Console.ReadLine());
                             var psw = Login.CheckingPassword();
                             SuperAdmin.ChangeUserPassword(username, psw);
                         }
@@ -108,14 +101,14 @@ namespace IndividualProject
         }
         //public static void MenuAdmin()
         //{
-        //    var Admin = new Admin();
+        //    var User = new User();
         //    bool check = true;
         //    do
         //    {
         //        Console.Clear();
         //        Console.BackgroundColor = ConsoleColor.DarkGray;
         //        Console.ForegroundColor = ConsoleColor.Red;
-        //        Console.WriteLine("----------Admin Menu----------");
+        //        Console.WriteLine("----------User Menu----------");
         //        Console.ResetColor();
         //        Console.WriteLine();
         //        Console.WriteLine("1.Add User");
@@ -175,8 +168,54 @@ namespace IndividualProject
         }
 
 
-
-
-
+        public static void MenuUser(string name)
+        {
+            var User = new User();
+            bool check = true;
+            do
+            {
+                switch (User.UserMenu())
+                {
+                    case "1":
+                        try
+                        {
+                            Console.Clear();
+                            Console.Write("Type receiver name : ");
+                            string ReceiverName = Login.CheckingUsernameForChangeAccess(Console.ReadLine());
+                            Console.WriteLine("Type the message :");
+                            var answer = Console.ReadLine();
+                            User.SendMessage(name, ReceiverName, answer);                            
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                        break;
+                    case "2":
+                        try
+                        {
+                            Console.Clear();
+                            Console.Write("Type receiver name : ");
+                            string ReceiverName = Login.CheckingUsernameForChangeAccess(Console.ReadLine());
+                            Console.Clear();
+                            var list = User.ViewMessage(name, ReceiverName);
+                            foreach(var x in list)
+                            {
+                                Console.WriteLine($"{x.TimeSent} User {x.SenderName} send to User {x.ReceiverName} : {x.Message}");
+                            }
+                            Console.ReadKey();
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                        break;
+                    case "0":
+                    default:
+                        check = false;
+                        break;
+                }
+            } while (check == true);
+        }
     }
 }

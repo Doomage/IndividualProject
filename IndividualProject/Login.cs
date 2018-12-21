@@ -28,11 +28,8 @@ namespace IndividualProject
             return Name;
         }
 
-        public static string CheckingUsernameForChangeAccess()
+        public static string CheckingUsernameForChangeAccess(string Name)
         {
-            Console.Clear();
-            Console.Write("Give Username : ");
-            string Name = Console.ReadLine();
             while (DatabaseConnection.ValidateUsername(Name) == false)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -42,7 +39,6 @@ namespace IndividualProject
             }
             return Name;
         }
-
 
         public static string CheckingPassword()
         {

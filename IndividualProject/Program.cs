@@ -15,7 +15,7 @@ namespace IndividualProject
             Login.ApplicationWelcomeMenu();
             do
             {
-                Console.Clear();               
+                Console.Clear();
                 Console.Write("Username : ");
                 string name = Console.ReadLine();
                 var psw = Login.CheckingPassword();
@@ -28,25 +28,30 @@ namespace IndividualProject
                     var UserAccess = DatabaseConnection.GetUserAccess(name, psw);
                     switch (UserAccess)
                     {
-                        case 4:
+                        case 5:
                             {
                                 Menu.MenuSuperAdmin();
                             }
                             break;
-                        case 3:
+                        case 4:
                             {
                                 Menu.MenuUserC();
                             }
                             break;
-                        case 2:
+                        case 3:
                             {
                                 Menu.MenuUserB();
+                            }
+                            break;
+                        case 2:
+                            {
+                                Menu.MenuUserA();
                             }
                             break;
                         case 1:
                         default:
                             {
-                                Menu.MenuUserA();
+                                Menu.MenuUser(name);
                             }
                             break;
                     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IndividualProject
 {
-    class UserA:AbstractUser
+    class UserA:User
     {
         
         public UserA()

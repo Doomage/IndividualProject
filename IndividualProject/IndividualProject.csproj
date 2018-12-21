@@ -42,9 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin.cs" />
+    <Compile Include="Messages.cs" />
+    <Compile Include="User.cs" />
     <Compile Include="DatabaseConnection.cs" />
-    <Compile Include="DictionaryForUsers.cs" />
     <Compile Include="Login.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Program.cs" />

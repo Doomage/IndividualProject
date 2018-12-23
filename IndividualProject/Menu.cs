@@ -76,6 +76,7 @@ namespace IndividualProject
                         catch (Exception e)
                         {
                             Console.WriteLine(e.Message);
+                            Console.ReadKey();
                         }
                         break;
                     case "5":
@@ -99,64 +100,120 @@ namespace IndividualProject
                 }
             } while (check == true);
         }
-        //public static void MenuAdmin()
-        //{
-        //    var User = new User();
-        //    bool check = true;
-        //    do
-        //    {
-        //        Console.Clear();
-        //        Console.BackgroundColor = ConsoleColor.DarkGray;
-        //        Console.ForegroundColor = ConsoleColor.Red;
-        //        Console.WriteLine("----------User Menu----------");
-        //        Console.ResetColor();
-        //        Console.WriteLine();
-        //        Console.WriteLine("1.Add User");
-        //        Console.WriteLine("2.Change User Access");
-        //        switch (Console.ReadLine())
-        //        {
-        //            case "1":
-        //                break;
-        //            case "2":
-        //                break;
-        //            case "0":
-        //            default:
-        //                check = false;
-        //                break;
-        //        }
-        //    } while (check == true);
-        //}
-        public static void MenuUserA()
+        
+        public static void MenuUserView(string name)
         {
-            var userA = new UserA();
-            Console.Clear();
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("----------UserA Menu----------");
-            Console.ResetColor();
-            Console.WriteLine();
-            Console.WriteLine("1.View the transacted data between the users");
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("0.Exit");
-            Console.ResetColor();
+            var userView = new UserView();
+
+            bool check = true;
+            do
+            {
+                switch (userView.UserMenu())
+                {
+                    case "1":
+                        try
+                        {
+                            userView.SendMessage(name);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                            Console.ReadKey();
+                        }
+                        break;
+                    case "2":
+                        try
+                        {
+                            userView.ViewMessage(name);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                            Console.ReadKey();
+                        }
+                        break;
+                    case "3":
+                        try
+                        {
+                            userView.ViewUserMessages();
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                        break;
+                    case "0":
+                    default:
+                        check = false;
+                        break;
+                }
+            } while (check == true);
 
         }
-        public static void MenuUserB()
-        {
-            var userB = new UserB();
-            Console.Clear();
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("----------UserB Menu----------");
-            Console.ResetColor();
-            Console.WriteLine();
-            Console.WriteLine("1.Add User");
-            Console.WriteLine("2.Change User Access");
 
-        }
-        public static void MenuUserC()
+        //TODO
+        public static void MenuUserViewEdit(string name)
         {
-            var Admin = new UserC();
+            var UserViewEdit = new UserViewEdit();
+            bool check = true;
+            do
+            {
+                switch (UserViewEdit.UserMenu())
+                {
+                    case "1":
+                        try
+                        {
+                            UserViewEdit.SendMessage(name);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                            Console.ReadKey();
+                        }
+                        break;
+                    case "2":
+                        try
+                        {
+                            UserViewEdit.ViewMessage(name);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                            Console.ReadKey();
+                        }
+                        break;
+                    case "3":
+                        try
+                        {
+                            UserViewEdit.ViewUserMessages();
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                        break;
+                    case "4":
+                        try
+                        {
+                            UserViewEdit.EditMessage();
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                        break;
+                    case "0":
+                    default:
+                        check = false;
+                        break;
+                }
+            } while (check == true);
+        }
+
+        //TODO
+        public static void MenuUserViewEditDelete(string name)
+        {
+            var Admin = new UserViewDelete();
             Console.Clear();
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.ForegroundColor = ConsoleColor.Red;
@@ -179,35 +236,23 @@ namespace IndividualProject
                     case "1":
                         try
                         {
-                            Console.Clear();
-                            Console.Write("Type receiver name : ");
-                            string ReceiverName = Login.CheckingUsernameForChangeAccess(Console.ReadLine());
-                            Console.WriteLine("Type the message :");
-                            var answer = Console.ReadLine();
-                            User.SendMessage(name, ReceiverName, answer);                            
+                            User.SendMessage(name);                            
                         }
                         catch (Exception e)
                         {
                             Console.WriteLine(e.Message);
+                            Console.ReadKey();
                         }
                         break;
                     case "2":
                         try
                         {
-                            Console.Clear();
-                            Console.Write("Type receiver name : ");
-                            string ReceiverName = Login.CheckingUsernameForChangeAccess(Console.ReadLine());
-                            Console.Clear();
-                            var list = User.ViewMessage(name, ReceiverName);
-                            foreach(var x in list)
-                            {
-                                Console.WriteLine($"{x.TimeSent} User {x.SenderName} send to User {x.ReceiverName} : {x.Message}");
-                            }
-                            Console.ReadKey();
+                            User.ViewMessage(name);
                         }
                         catch (Exception e)
                         {
                             Console.WriteLine(e.Message);
+                            Console.ReadKey();
                         }
                         break;
                     case "0":

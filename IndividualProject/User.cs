@@ -15,7 +15,7 @@ namespace IndividualProject
             userlist = userenum.user;
         }
 
-        public  string UserMenu()
+        public virtual string UserMenu()
         {
             Console.Clear();
             Console.BackgroundColor = ConsoleColor.DarkGray;
@@ -31,15 +31,41 @@ namespace IndividualProject
             return Console.ReadLine();
         }
 
-        public void SendMessage(string sender,string receiver,string Message)
+        public void SendMessage(string name)
         {
             var db = new DatabaseConnection();
-            db.AddMessage(sender, receiver, Message);
+            Console.Clear();
+            Console.Write("Type receiver name : ");
+            string ReceiverName = Login.CheckingUsernameForChangeAccess(Console.ReadLine());
+            Console.WriteLine("Type the message :");
+            var Message = Console.ReadLine();
+            db.AddMessage(name, ReceiverName, Message);
         }
+        public void ViewMessage(string name)
+        {
+            Console.Clear();
+            Console.Write("Type receiver name : ");
+            string ReceiverName = Login.CheckingUsernameForChangeAccess(Console.ReadLine());
+            Console.Clear();
+            var list = ViewMessage(name, ReceiverName);
+            var list2 = ViewMessage(ReceiverName, name);
+            foreach (var element in list2)
+            {
+                list.Add(element);
+            }
+            list.Sort((x, y) => string.Compare(Convert.ToString(x.TimeSent), Convert.ToString(y.TimeSent)));
+            foreach (var x in list)
+            {
+                Console.WriteLine($"{x.TimeSent} - {x.SenderName} send to {x.ReceiverName} : {x.Message}");
+            }
+            Console.ReadKey();
+        }
+
         public List<Messages> ViewMessage(string sender, string receiver)
         {
             var db = new DatabaseConnection();
             return db.ReadMessages(sender, receiver);
         }
+        
     }
 }

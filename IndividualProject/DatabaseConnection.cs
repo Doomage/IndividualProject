@@ -217,6 +217,25 @@ namespace IndividualProject
             }
         }
 
+        public static void UpdateMessages( string Message, int id)
+        {
+            var dbcon = new SqlConnection(connectionstring);
+            using (dbcon)
+            {
+                dbcon.Open();
+                var cmd = new SqlCommand("UpdateMessages", dbcon);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@messsage", Message);
+                cmd.Parameters.AddWithValue("@MessagesId", id);
+
+                var affected = cmd.ExecuteNonQuery();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"{affected} Affected rows");
+                Console.ResetColor();
+                Console.ReadKey();
+            }
+        }
 
         public List<Messages> ReadMessages(string Sendername, string ReceiverName)
         {
@@ -236,18 +255,53 @@ namespace IndividualProject
                     {
                         var datetime = reader[0];
                         var message = reader[1];
+                        var id = reader[2];
                         messages.Add(new Messages()
                         {
                             Message = Convert.ToString(message),
                             TimeSent = Convert.ToDateTime(datetime),
                             SenderName = Sendername,
-                            ReceiverName = ReceiverName                           
+                            ReceiverName = ReceiverName,
+                            MessagesId = Convert.ToInt32(id)
                         });
                     }
                 }
                 return messages;
             }
         }
-     
+
+        public List<Messages> ChooseMessages(string Sendername)
+        {
+            List<Messages> messages = new List<Messages>();
+            var dbcon = new SqlConnection(connectionstring);
+            using (dbcon)
+            {
+                dbcon.Open();
+                var cmd = new SqlCommand("ChooseMessage", dbcon);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@SenderName", Sendername);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var messageid = reader[0];
+                        var message = reader[1];
+                        var receivername = reader[2];
+                        messages.Add(new Messages()
+                        {
+                            Message = Convert.ToString(message),
+                            SenderName = Sendername,
+                            ReceiverName = Convert.ToString(receivername),
+                            MessagesId = Convert.ToInt32(messageid)
+                        });
+                    }
+                }
+                return messages;
+            }
+
+        }
+
+
     }
 }

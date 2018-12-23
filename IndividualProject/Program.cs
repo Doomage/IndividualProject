@@ -35,17 +35,17 @@ namespace IndividualProject
                             break;
                         case 4:
                             {
-                                Menu.MenuUserC();
+                                Menu.MenuUserViewEditDelete(name);
                             }
                             break;
                         case 3:
                             {
-                                Menu.MenuUserB();
+                                Menu.MenuUserViewEdit(name);
                             }
                             break;
                         case 2:
                             {
-                                Menu.MenuUserA();
+                                Menu.MenuUserView(name);
                             }
                             break;
                         case 1:

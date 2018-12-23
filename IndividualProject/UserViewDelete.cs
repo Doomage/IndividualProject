@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace IndividualProject
 {
-    class UserC:UserB
+    class UserViewDelete:UserViewEdit
     {
         
-        public UserC() : base()
+        public UserViewDelete() : base()
         {           
             userlist = userenum.userc;
         }
 
         public void DeleteDatabaseColumn()
         {
-            Console.WriteLine($"I am {Name} and i can delete Database");
+            
         }
     }
 }

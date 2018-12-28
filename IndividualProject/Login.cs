@@ -11,7 +11,27 @@ namespace IndividualProject
         public Login()
         {
         }
-
+        public static bool SignUp()
+        {
+            
+            var Sadmin = new SuperAdmin();
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("You have to create an Account to log in");
+            Console.ResetColor();
+            Console.WriteLine("Do u want to create an account? y/n");
+            string answer = Console.ReadLine();
+            switch (answer)
+            {
+                case "y":
+                    Sadmin.CreateAccount(Login.CheckingUsername(), Login.CheckingPassword());
+                    return true;
+                case "n":
+                default:
+                    Console.WriteLine("Bye Bye");
+                    return false;                    
+            }
+        }
         public static string CheckingUsername()
         {
             Console.Clear();
@@ -46,10 +66,10 @@ namespace IndividualProject
             ConsoleKeyInfo key;
 
             string psw = string.Empty;
-
             do
             {
                 key = Console.ReadKey(true);
+                
                 if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
                 {
                     psw += key.KeyChar;
@@ -71,19 +91,7 @@ namespace IndividualProject
             return psw;
         }
 
-        public static void ApplicationWelcomeMenu()
-        {
-            Console.SetWindowSize(110, 20);
-            Console.BackgroundColor = ConsoleColor.Red;
-            Console.SetCursorPosition(35, 9);
-            Console.WriteLine("----------------------------------------");
-            Console.SetCursorPosition(35, 8);
-            Console.WriteLine("-------Welcome to Project Chat----------");
-            Console.SetCursorPosition(35, 7);
-            Console.WriteLine("----------------------------------------");
-            Console.ResetColor();
-            Console.ReadKey();
-        }
+        
     }
 }
 

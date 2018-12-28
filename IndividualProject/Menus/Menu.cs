@@ -42,9 +42,9 @@ namespace IndividualProject
                             Console.ResetColor();
                             Console.WriteLine("Give Access level u want to grand");
                             Console.WriteLine("1.User");
-                            Console.WriteLine("2.UserA");
-                            Console.WriteLine("3.UserB");
-                            Console.WriteLine("4.UserC");
+                            Console.WriteLine("2.UserView");
+                            Console.WriteLine("3.UserViewEdit");
+                            Console.WriteLine("4.UserViewEditDelete");
                             do
                             {
                                 Console.WriteLine("U have to pick between 1 and 4");
@@ -124,7 +124,7 @@ namespace IndividualProject
                     case "2":
                         try
                         {
-                            userView.ViewMessage(name);
+                            userView.ViewMessages(name);
                         }
                         catch (Exception e)
                         {
@@ -135,7 +135,7 @@ namespace IndividualProject
                     case "3":
                         try
                         {
-                            userView.ViewUserMessages();
+                            userView.ViewUsersMessages();
                         }
                         catch (Exception e)
                         {
@@ -151,7 +151,7 @@ namespace IndividualProject
 
         }
 
-        //TODO
+        
         public static void MenuUserViewEdit(string name)
         {
             var UserViewEdit = new UserViewEdit();
@@ -174,7 +174,7 @@ namespace IndividualProject
                     case "2":
                         try
                         {
-                            UserViewEdit.ViewMessage(name);
+                            UserViewEdit.ViewMessages(name);
                         }
                         catch (Exception e)
                         {
@@ -185,7 +185,7 @@ namespace IndividualProject
                     case "3":
                         try
                         {
-                            UserViewEdit.ViewUserMessages();
+                            UserViewEdit.ViewUsersMessages();
                         }
                         catch (Exception e)
                         {
@@ -210,18 +210,74 @@ namespace IndividualProject
             } while (check == true);
         }
 
-        //TODO
+        
         public static void MenuUserViewEditDelete(string name)
         {
-            var Admin = new UserViewDelete();
-            Console.Clear();
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("----------UserC Menu----------");
-            Console.ResetColor();
-            Console.WriteLine();
-            Console.WriteLine("1.Add User");
-            Console.WriteLine("2.Change User Access");
+            var Uved = new UserViewDelete();
+            bool check = true;
+            do
+            {
+                switch (Uved.UserMenu())
+                {
+                    case "1":
+                        try
+                        {
+                            Uved.SendMessage(name);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                            Console.ReadKey();
+                        }
+                        break;
+                    case "2":
+                        try
+                        {
+                            Uved.ViewMessages(name);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                            Console.ReadKey();
+                        }
+                        break;
+                    case "3":
+                        try
+                        {
+                            Uved.ViewUsersMessages();
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                        break;
+                    case "4":
+                        try
+                        {
+                            Uved.EditMessage();
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                        break;
+                    case "5":
+                        try
+                        {
+                            Uved.DeleteMessages();
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                        break;
+                    case "0":
+                    default:
+                        check = false;
+                        break;
+                }
+            } while (check == true);
+
         }
 
 
@@ -247,7 +303,7 @@ namespace IndividualProject
                     case "2":
                         try
                         {
-                            User.ViewMessage(name);
+                            User.ViewMessages(name);
                         }
                         catch (Exception e)
                         {

@@ -64,7 +64,38 @@ namespace IndividualProject
         public void ViewUsersTable()
         {
             var bdview = new DatabaseConnection();
-            bdview.SelectAccountTable();
+           var list =  bdview.SelectAccountTable();
+            foreach(var x in list)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write("Username : ");
+                Console.ResetColor();
+                Console.Write(x.Username);
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.Write(" Access : ");
+                Console.ResetColor();
+                if (x.Userlevel == 1)
+                {
+                    Console.Write("SimpleUser" + "\n");
+                }
+                else if (x.Userlevel ==2)
+                {
+                    Console.Write("UserView" + "\n");
+                }
+                else if (x.Userlevel == 3)
+                {
+                    Console.Write("UserViewEditDelete" + "\n");
+                }
+                else if (x.Userlevel == 4)
+                {
+                    Console.Write("UserViewEditDelete" + "\n");
+                }
+                else
+                {
+                    Console.Write("Admin" + "\n");
+                }
+            }
+            Console.ReadKey();
         }
 
         public void ChangeUserAccess(string name,int userlevel)

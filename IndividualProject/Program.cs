@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
 
 namespace IndividualProject
 {
@@ -12,72 +9,92 @@ namespace IndividualProject
             Console.Title = "Project Chat";
             SuperAdmin Sadmin = new SuperAdmin();
             var check = true;
-            Login.ApplicationWelcomeMenu();
+            WelcomeMenu.ApplicationWelcomeMenu();
             do
             {
                 Console.Clear();
-                Console.Write("Username : ");
-                string name = Console.ReadLine();
-                var psw = Login.CheckingPassword();
-                if (DatabaseConnection.ValidateAccount(name, psw))
+                Console.WriteLine("1.Login\n2.Sign Up");
+                try
                 {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("You login");
-                    Console.ReadKey();
-                    Console.ResetColor();
-                    var UserAccess = DatabaseConnection.GetUserAccess(name, psw);
-                    switch (UserAccess)
+                    var AnswerDecide = int.Parse(Console.ReadLine());
+                    switch (AnswerDecide)
                     {
-                        case 5:
-                            {
-                                Menu.MenuSuperAdmin();
-                            }
-                            break;
-                        case 4:
-                            {
-                                Menu.MenuUserViewEditDelete(name);
-                            }
-                            break;
-                        case 3:
-                            {
-                                Menu.MenuUserViewEdit(name);
-                            }
-                            break;
-                        case 2:
-                            {
-                                Menu.MenuUserView(name);
-                            }
-                            break;
                         case 1:
+                            {
+                                Console.Clear();
+
+                                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                                Console.WriteLine("Add username and passowrd to login\n");
+                                Console.ResetColor();
+                                Console.Write("Username : ");
+                                string name = Console.ReadLine();
+                                var psw = Login.CheckingPassword();
+                                if (DatabaseConnection.ValidateAccount(name, psw))
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.WriteLine("You login");
+                                    Console.ReadKey();
+                                    Console.ResetColor();
+                                    var UserAccess = DatabaseConnection.GetUserAccess(name, psw);
+                                    switch (UserAccess)
+                                    {
+                                        case 5:
+                                            {
+                                                Menu.MenuSuperAdmin();
+                                            }
+                                            break;
+                                        case 4:
+                                            {
+                                                Menu.MenuUserViewEditDelete(name);
+                                            }
+                                            break;
+                                        case 3:
+                                            {
+                                                Menu.MenuUserViewEdit(name);
+                                            }
+                                            break;
+                                        case 2:
+                                            {
+                                                Menu.MenuUserView(name);
+                                            }
+                                            break;
+                                        case 1:
+                                        default:
+                                            {
+                                                Menu.MenuUser(name);
+                                            }
+                                            break;
+                                    }
+                                }
+                                else
+                                {
+                                    Login.SignUp();
+                                    check = false;
+                                }
+                                break;
+                            }
+                        case 2:
                         default:
                             {
-                                Menu.MenuUser(name);
+
+                                if (Login.SignUp() == false)
+                                {
+                                    check = false;
+                                }
+                                break;
                             }
-                            break;
                     }
+                    Console.ReadKey();
                 }
-                else
+                catch (Exception e)
                 {
-                    Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("You have to create an Account to log in");
-                    Console.ResetColor();
-                    Console.WriteLine("Do u want to create an account? y/n");
-                    string answer = Console.ReadLine();
-                    switch (answer)
-                    {
-                        case "y":
-                            Sadmin.CreateAccount(Login.CheckingUsername(), Login.CheckingPassword());
-                            break;
-                        case "n":
-                        default:
-                            Console.WriteLine("Bye Bye");
-                            check = false;
-                            break;
-                    }
+                    Console.WriteLine(e.Message);
+                    Console.ReadKey();
                 }
-                Console.ReadKey();
+
             } while (check == true);
         }
     }
 }
+
+

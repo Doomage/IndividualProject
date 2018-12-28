@@ -18,30 +18,30 @@ namespace IndividualProject
         {
         }
 
-        public void SelectAccountTable()
+        public List<Accounts> SelectAccountTable()
         {
+            List<Accounts> accounts = new List<Accounts>();
             var dbcon = new SqlConnection(connectionstring);
             using (dbcon)
             {
                 dbcon.Open();
-                var cmd = new SqlCommand("select username,userlevel from Accounts", dbcon);
+                var cmd = new SqlCommand("SelectAccounts", dbcon);
+                cmd.CommandType = CommandType.StoredProcedure;
+
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         var username = reader[0];
-                        var PersonAccess = reader[1];
-                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                        Console.Write("Username : ");
-                        Console.ResetColor();
-                        Console.Write(username);
-                        Console.ForegroundColor = ConsoleColor.DarkCyan;
-                        Console.Write(" Access : ");
-                        Console.ResetColor();
-                        Console.Write(PersonAccess+"\n");                       
+                        var userlevel = reader[1];                      
+                        accounts.Add(new Accounts()
+                        {
+                            Username = Convert.ToString(username),
+                            Userlevel = Convert.ToInt32(userlevel)
+                        });
                     }
                 }
-                Console.ReadKey();
+                return accounts;
             }
         }
 
@@ -53,7 +53,7 @@ namespace IndividualProject
                 dbcon.Open();
                 var cmd = new SqlCommand("InsertAccount", dbcon);
                 cmd.CommandType = CommandType.StoredProcedure;
-                
+
                 cmd.Parameters.AddWithValue("@Username", username);
                 cmd.Parameters.AddWithValue("@Password", psw);
                 cmd.Parameters.AddWithValue("@PersonAccess", PersonAccess);
@@ -73,7 +73,10 @@ namespace IndividualProject
             using (dbcon)
             {
                 dbcon.Open();
-                var cmd = new SqlCommand("delete from Accounts where Username = '" + username + "'", dbcon);
+                var cmd = new SqlCommand("RemoveAccountByUsername", dbcon);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@username", username);
+
                 var affected = cmd.ExecuteNonQuery();
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"{affected} Affected rows");
@@ -86,8 +89,10 @@ namespace IndividualProject
         public static bool ValidateAccount(string name, string password)
         {
             var dbcon = new SqlConnection(connectionstring);
+
             using (dbcon)
             {
+
                 dbcon.Open();
                 var cmd = new SqlCommand("Validate_Account", dbcon);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -100,8 +105,10 @@ namespace IndividualProject
                 }
                 else
                 {
+
                     return false;
                 }
+
             }
         }
 
@@ -116,15 +123,12 @@ namespace IndividualProject
                 cmd.Parameters.AddWithValue("@Username", name);
                 if (cmd.ExecuteScalar().Equals(1))
                 {
-                    return true;               
+                    return true;
                 }
                 else
                 {
                     return false;
                 }
-
-                //Console.WriteLine(cmd.Parameters["@Password"].Value);
-
             }
 
         }
@@ -134,7 +138,7 @@ namespace IndividualProject
             var dbcon = new SqlConnection(connectionstring);
             using (dbcon)
             {
-                dbcon.Open();               
+                dbcon.Open();
                 var cmd = new SqlCommand("AssignRoleBySuperAdmin", dbcon);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@username", name);
@@ -172,9 +176,9 @@ namespace IndividualProject
 
                 cmd.Parameters.AddWithValue("@Username", name);
                 cmd.Parameters.AddWithValue("@Password", password);
-                
+
                 return Convert.ToInt32(cmd.ExecuteScalar());
-                
+
             }
 
         }
@@ -196,7 +200,7 @@ namespace IndividualProject
             }
         }
 
-        public void AddMessage(string Sendername,string ReceiverName,string Message)
+        public void AddMessage(string Sendername, string ReceiverName, string Message)
         {
             var dbcon = new SqlConnection(connectionstring);
             using (dbcon)
@@ -217,7 +221,7 @@ namespace IndividualProject
             }
         }
 
-        public static void UpdateMessages( string Message, int id)
+        public static void UpdateMessages(string Message, int id)
         {
             var dbcon = new SqlConnection(connectionstring);
             using (dbcon)
@@ -233,11 +237,15 @@ namespace IndividualProject
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"{affected} Affected rows");
                 Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                Console.WriteLine("Press enter to continue");
+                Console.ResetColor();
                 Console.ReadKey();
+
             }
         }
 
-        public List<Messages> ReadMessages(string Sendername, string ReceiverName)
+        public List<Messages> ReadMessages(string Sendername, string Receivername)
         {
             List<Messages> messages = new List<Messages>();
             var dbcon = new SqlConnection(connectionstring);
@@ -248,7 +256,7 @@ namespace IndividualProject
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@sendername", Sendername);
-                cmd.Parameters.AddWithValue("@receivername", ReceiverName);
+                cmd.Parameters.AddWithValue("@receivername", Receivername);
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -256,12 +264,14 @@ namespace IndividualProject
                         var datetime = reader[0];
                         var message = reader[1];
                         var id = reader[2];
+                        var sendername = reader[3];
+                        var receivername = reader[4];
                         messages.Add(new Messages()
                         {
                             Message = Convert.ToString(message),
                             TimeSent = Convert.ToDateTime(datetime),
-                            SenderName = Sendername,
-                            ReceiverName = ReceiverName,
+                            SenderName = Convert.ToString(sendername),
+                            ReceiverName = Convert.ToString(receivername),
                             MessagesId = Convert.ToInt32(id)
                         });
                     }
@@ -270,7 +280,7 @@ namespace IndividualProject
             }
         }
 
-        public List<Messages> ChooseMessages(string Sendername)
+        public List<Messages> ChooseMessagesBySendername(string Sendername)
         {
             List<Messages> messages = new List<Messages>();
             var dbcon = new SqlConnection(connectionstring);
@@ -301,7 +311,96 @@ namespace IndividualProject
             }
 
         }
+        public List<Messages> ChooseMessagesByReceivername(string receivername)
+        {
+            List<Messages> messages = new List<Messages>();
+            var dbcon = new SqlConnection(connectionstring);
+            using (dbcon)
+            {
+                dbcon.Open();
+                var cmd = new SqlCommand("ViewMessages2", dbcon);
+                cmd.CommandType = CommandType.StoredProcedure;
 
+                cmd.Parameters.AddWithValue("@receivername", receivername);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var datetime = reader[0];
+                        var message = reader[1];
+                        var id = reader[2];
+                        var sendername = reader[3];
+                        messages.Add(new Messages()
+                        {
+                            Message = Convert.ToString(message),
+                            TimeSent = Convert.ToDateTime(datetime),
+                            SenderName = Convert.ToString(sendername),
+                            ReceiverName = receivername,
+                            MessagesId = Convert.ToInt32(id)
+                        });
+                    }
+                }
+                return messages;
+            }
 
+        }
+
+        // einai gia ton user gia na vlepei ola ta messages to/from user
+        public List<Messages> ViewMessagesByName(string Sendername)
+        {
+            List<Messages> messages = new List<Messages>();
+            var dbcon = new SqlConnection(connectionstring);
+            using (dbcon)
+            {
+                dbcon.Open();
+                var cmd = new SqlCommand("ViewMessagesByName", dbcon);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@name", Sendername);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var datetime = reader[0];
+                        var message = reader[1];
+                        var id = reader[2];
+                        var sendername = reader[3];
+                        var receivername = reader[4];
+                        messages.Add(new Messages()
+                        {
+                            Message = Convert.ToString(message),
+                            TimeSent = Convert.ToDateTime(datetime),
+                            SenderName = Convert.ToString(sendername),
+                            ReceiverName = Convert.ToString(receivername),
+                            MessagesId = Convert.ToInt32(id)
+                        });
+                    }
+                    return messages;
+                }
+            }
+        }
+
+        public void DeleteMessagesById(int id)
+        {
+            var dbcon = new SqlConnection(connectionstring);
+            using (dbcon)
+            {
+                dbcon.Open();
+                var cmd = new SqlCommand("DeleteMessagesById", dbcon);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@MessagesId", id);
+                var affected = cmd.ExecuteNonQuery();
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"{affected} Affected rows");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                Console.WriteLine("\nPress enter to continue");
+                Console.ResetColor();
+                Console.ReadKey();
+            }
+
+        }
     }
 }

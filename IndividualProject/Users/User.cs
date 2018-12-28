@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace IndividualProject
 {
-    class UserView:User
+    class User : AbstractUser
     {
-        
-        public UserView()
-        {            
-            userlist = userenum.usera;
+
+
+        public User()
+        {
+            userlist = userenum.user;
         }
-        public override string UserMenu()
+
+        public virtual string UserMenu()
         {
             Console.Clear();
             Console.BackgroundColor = ConsoleColor.DarkGray;
@@ -23,32 +25,36 @@ namespace IndividualProject
             Console.WriteLine();
             Console.WriteLine("1.Send a Message");
             Console.WriteLine("2.View your Messages");
-            Console.WriteLine("3.View transacted message between 2 users");
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("0.Log Out");
             Console.ResetColor();
             return Console.ReadLine();
         }
-        
-        public void ViewUserMessages()
+
+        public void SendMessage(string name)
         {
+            var db = new DatabaseConnection();
             Console.Clear();
-            Console.Write("Type the 1st User Name : ");
-            string FirstName = Login.CheckingUsernameForChangeAccess(Console.ReadLine());
-            Console.Write("Type the 2nd User Name : ");
-            string SecondName = Login.CheckingUsernameForChangeAccess(Console.ReadLine());
-            Console.Clear();
-            var list = ViewMessage(FirstName, SecondName);
-            var list2 = ViewMessage(SecondName, FirstName);
-            foreach (var element in list2)
-            {
-                list.Add(element);
-            }
+            Console.Write("Type receiver name : ");
+            string ReceiverName = Login.CheckingUsernameForChangeAccess(Console.ReadLine());
+            Console.WriteLine("Type the message :");
+            var Message = Console.ReadLine();
+            db.AddMessage(name, ReceiverName, Message);
+        }
+
+        public void ViewMessages(string name)
+        {
+            var db = new DatabaseConnection();
+            var list = db.ViewMessagesByName(name);
             list.Sort((x, y) => string.Compare(Convert.ToString(x.TimeSent), Convert.ToString(y.TimeSent)));
+            Console.Clear();
             foreach (var x in list)
             {
-                Console.WriteLine($"Message id {x.MessagesId} = {x.TimeSent} User {x.SenderName} send to User {x.ReceiverName} : {x.Message}");
+                Console.WriteLine($"{x.TimeSent} - {x.SenderName} send to {x.ReceiverName} : {x.Message}");
             }
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine("\nPress enter to continue");
+            Console.ResetColor();
             Console.ReadKey();
         }
     }

@@ -11,18 +11,18 @@ namespace IndividualProject
         DatabaseConnection db = new DatabaseConnection();
         
 
-        public static void MenuSuperAdmin()
+        public static void MenuSuperAdmin(string name)
         {
-            var SuperAdmin = new SuperAdmin();
+            var SAdmin = new SuperAdmin();
             bool check = true;
             do
             {
-                switch (SuperAdmin.SuperAdminMenu())
+                switch (SAdmin.SuperAdminMenu())
                 {
                     case "1":
                         try
                         {
-                            SuperAdmin.CreateAccount(Login.CheckingUsername(), Login.CheckingPassword());
+                            SAdmin.CreateAccount(Login.CheckingUsername(), Login.CheckingPassword());
                         }
                         catch (Exception e)
                         {
@@ -50,7 +50,7 @@ namespace IndividualProject
                                 Console.WriteLine("U have to pick between 1 and 4");
                                 UserAccess = int.Parse(Console.ReadLine());
                             } while (UserAccess < 1 || UserAccess > 4);
-                            SuperAdmin.ChangeUserAccess(username, UserAccess);
+                            SAdmin.ChangeUserAccess(username, UserAccess);
                         }
                         catch (Exception e)
                         {
@@ -61,7 +61,7 @@ namespace IndividualProject
                         try
                         {
                             Console.Clear();
-                            SuperAdmin.ViewUsersTable();
+                            SAdmin.ViewUsersTable();
                         }
                         catch (Exception e)
                         {
@@ -86,11 +86,33 @@ namespace IndividualProject
                             Console.Write("Give Username you want to change the psw : ");
                             var username = Login.CheckingUsernameForChangeAccess(Console.ReadLine());
                             var psw = Login.CheckingPassword();
-                            SuperAdmin.ChangeUserPassword(username, psw);
+                            SAdmin.ChangeUserPassword(username, psw);
                         }
                         catch (Exception e)
                         {
                             Console.WriteLine(e.Message);
+                        }
+                        break;
+                    case "6":
+                        try
+                        {
+                            SAdmin.SendMessage(name);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                            Console.ReadKey();
+                        }
+                        break;
+                    case "7":
+                        try
+                        {
+                            SAdmin.ViewMessages(name);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                            Console.ReadKey();
                         }
                         break;
                     case "0":
@@ -195,7 +217,7 @@ namespace IndividualProject
                     case "4":
                         try
                         {
-                            UserViewEdit.EditMessage();
+                            UserViewEdit.EditMessage(name);
                         }
                         catch (Exception e)
                         {
@@ -254,7 +276,7 @@ namespace IndividualProject
                     case "4":
                         try
                         {
-                            Uved.EditMessage();
+                            Uved.EditMessage(name);
                         }
                         catch (Exception e)
                         {
@@ -264,7 +286,7 @@ namespace IndividualProject
                     case "5":
                         try
                         {
-                            Uved.DeleteMessages();
+                            Uved.DeleteMessages(name);
                         }
                         catch (Exception e)
                         {

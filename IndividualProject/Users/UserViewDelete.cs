@@ -30,11 +30,12 @@ namespace IndividualProject
             return Console.ReadLine();
         }
 
-        public void DeleteMessages()
+        public void DeleteMessages(string name)
         {
 
             Console.Clear();
-            Console.Write("Type the User Name you want to edit his messages : ");
+            var MessageForFile = " " ;
+            Console.Write("Type the User Name you want to delete his messages : ");
             var Sender = Login.CheckingUsernameForChangeAccess(Console.ReadLine());
             var db = new DatabaseConnection();
             var list = db.ChooseMessagesBySendername(Sender);
@@ -59,15 +60,14 @@ namespace IndividualProject
                 Console.WriteLine($"Message id {x.MessagesId}, {x.TimeSent} : {x.SenderName} send to {x.ReceiverName} : {x.Message}");
                 checkid.Add(x.MessagesId);
             }
-            Console.Write("\nWrite the Message id u want to change or press enter to go back: ");
+            Console.Write("\nWrite the Message id u want to delete or press enter to go back: ");
             var messageid = int.Parse(Console.ReadLine());
             bool checkmesssageid = true;
             do
-            {
-                foreach (var s in checkid)
-                {
-                    if (messageid == s)
+            {                
+                    if (checkid.Contains(messageid))
                     {
+                        MessageForFile = DatabaseConnection.SelectMessageByID(messageid);
                         db.DeleteMessagesById(messageid);
                         checkmesssageid = false;
                         break;
@@ -79,8 +79,8 @@ namespace IndividualProject
                         Console.ResetColor();
                         messageid = int.Parse(Console.ReadLine());
                     }
-                }
             } while (checkmesssageid == true);
+            TransactedDataFile.DeleteMessageFile(Sender, MessageForFile, name, DateTime.Now);
         }
     }
 }

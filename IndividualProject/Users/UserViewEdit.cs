@@ -14,11 +14,13 @@ namespace IndividualProject
             userlist = userenum.userb;
         }
 
-        public void EditMessage()
+        public void EditMessage(string name)
         {
             
             Console.Clear();
             Console.Write("Type the User Name you want to edit his messages : ");
+            //Using datetime.now to take the time and add it to file!
+            DateTime dateTime = DateTime.Now;
             var Sender = Login.CheckingUsernameForChangeAccess(Console.ReadLine());
             var db = new DatabaseConnection();
             var list = db.ChooseMessagesBySendername(Sender);
@@ -47,10 +49,8 @@ namespace IndividualProject
             var messageid = int.Parse(Console.ReadLine());
             bool checkmesssageid = true;
             do
-            {
-                foreach (var s in checkid)
-                {
-                    if (messageid == s)
+            {       
+                    if (checkid.Contains(messageid))
                     {
                         checkmesssageid = false;
                         break;
@@ -61,12 +61,12 @@ namespace IndividualProject
                         Console.Write("Write the correct Message id : ");
                         Console.ResetColor();
                         messageid = int.Parse(Console.ReadLine());
-                    }
-                }
+                    }               
             } while (checkmesssageid == true);
             Console.Write("\nWrite the new message : ");
             var message = Console.ReadLine();
             DatabaseConnection.UpdateMessages(message, messageid);
+            var file = new TransactedDataFile(Sender, message, name,dateTime);
         }
 
         public override string UserMenu()

@@ -298,12 +298,14 @@ namespace IndividualProject
                         var messageid = reader[0];
                         var message = reader[1];
                         var receivername = reader[2];
+                        var timesent = reader[3];
                         messages.Add(new Messages()
                         {
                             Message = Convert.ToString(message),
                             SenderName = Sendername,
                             ReceiverName = Convert.ToString(receivername),
-                            MessagesId = Convert.ToInt32(messageid)
+                            MessagesId = Convert.ToInt32(messageid),
+                            TimeSent = Convert.ToDateTime(timesent)
                         });
                     }
                 }
@@ -402,5 +404,25 @@ namespace IndividualProject
             }
 
         }
+
+        public static string SelectMessageByID(int id)
+        {
+            var dbcon = new SqlConnection(connectionstring);
+            using (dbcon)
+            {
+                dbcon.Open();
+                var cmd = new SqlCommand("SelectMessageByID", dbcon);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@messageid", id);
+                var affected = cmd.ExecuteNonQuery();
+
+
+                return Convert.ToString(cmd.ExecuteScalar());
+                
+            }
+
+        }
+
     }
 }

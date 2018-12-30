@@ -40,7 +40,7 @@ namespace IndividualProject
                                     {
                                         case 5:
                                             {
-                                                Menu.MenuSuperAdmin();
+                                                Menu.MenuSuperAdmin(name);
                                             }
                                             break;
                                         case 4:

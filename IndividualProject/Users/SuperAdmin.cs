@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IndividualProject
 {
-    class SuperAdmin : AbstractUser
+    class SuperAdmin : User
     {        
         public SuperAdmin()
         {   
@@ -26,6 +26,8 @@ namespace IndividualProject
             Console.WriteLine("3. View Users and each Access");
             Console.WriteLine("4. Delete a User");
             Console.WriteLine("5. Update User password");
+            Console.WriteLine("6. Send a Message");
+            Console.WriteLine("7. View Your Messages");
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("0.Exit");
             Console.ResetColor();

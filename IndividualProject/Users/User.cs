@@ -31,7 +31,7 @@ namespace IndividualProject
             return Console.ReadLine();
         }
 
-        public void SendMessage(string name)
+        public  void SendMessage(string name)
         {
             var db = new DatabaseConnection();
             Console.Clear();
@@ -40,9 +40,10 @@ namespace IndividualProject
             Console.WriteLine("Type the message :");
             var Message = Console.ReadLine();
             db.AddMessage(name, ReceiverName, Message);
+            var file = new TransactedDataFile(ReceiverName, Message,name);
         }
 
-        public void ViewMessages(string name)
+        public  void ViewMessages(string name)
         {
             var db = new DatabaseConnection();
             var list = db.ViewMessagesByName(name);

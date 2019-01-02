@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Configuration;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 
 namespace IndividualProject
 {
-
+    
 
     class DatabaseConnection
     {
-        private static string connectionstring = "Server= DESKTOP-OJEQUAD\\SQLEXPRESS; Database= IndividualProject;Integrated Security = SSPI;";
+        // private static string connectionstring = "Server= DESKTOP-OJEQUAD\\SQLEXPRESS; Database= IndividualProject;Integrated Security = SSPI;";
+        private static string connectionstring = Properties.Settings.Default.connectionString;
 
         public DatabaseConnection()
         {
+            
         }
 
         public List<Accounts> SelectAccountTable()

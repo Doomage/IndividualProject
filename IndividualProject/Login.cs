@@ -17,9 +17,18 @@ namespace IndividualProject
         public static string CheckingUsername()
         {
             Console.Clear();
-            Console.Write("Give me Username you want to Create : ");
+            Console.Write("Type Username you want to Create : ");
             string Name = Console.ReadLine();
-
+            // checking if the username is empty or has spaces!
+            while (Name == string.Empty || Name.Contains(" "))
+            {               
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("You can't have a Username with Spaces");
+                Console.ResetColor();
+                Console.Write("Type Username again : ");                
+                Name = Console.ReadLine();
+                Console.Clear();
+            }
             while (DatabaseConnection.ValidateUsername(Name) == true)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -42,7 +51,7 @@ namespace IndividualProject
         }
         public static string CheckingPassword()
         {
-            Console.Write("Password : ");
+            Console.Write("Give Password : ");
             ConsoleKeyInfo key;
 
             string psw = string.Empty;

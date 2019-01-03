@@ -19,6 +19,7 @@ namespace IndividualProject
                     var AnswerDecide = int.Parse(Console.ReadLine());
                     switch (AnswerDecide)
                     {
+                        default:
                         case 1:
                             {
                                 Console.Clear();
@@ -76,8 +77,7 @@ namespace IndividualProject
                             {
                                 Login.SignUp();                              
                                 break;
-                            }
-                        default:
+                            }                       
                         case 0:                      
                             {
                                 Console.Clear();

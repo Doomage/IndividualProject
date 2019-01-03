@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IndividualProject
 {
     public class Menu
     {
         DatabaseConnection db = new DatabaseConnection();
-        
-
+       
         public static void MenuSuperAdmin(string name)
         {
             var SAdmin = new SuperAdmin();
@@ -27,6 +22,7 @@ namespace IndividualProject
                         catch (Exception e)
                         {
                             Console.WriteLine(e.Message);
+                            Console.ReadKey();
                         }
                         break;
                     case "2":
@@ -47,7 +43,7 @@ namespace IndividualProject
                             Console.WriteLine("4.UserViewEditDelete");
                             do
                             {
-                                Console.WriteLine("U have to pick between 1 and 4");
+                                Console.WriteLine("U have to choose between 1 and 4");
                                 UserAccess = int.Parse(Console.ReadLine());
                             } while (UserAccess < 1 || UserAccess > 4);
                             SAdmin.ChangeUserAccess(username, UserAccess);
@@ -55,6 +51,7 @@ namespace IndividualProject
                         catch (Exception e)
                         {
                             Console.WriteLine(e.Message);
+                            Console.ReadKey();
                         }
                         break;
                     case "3":
@@ -66,6 +63,7 @@ namespace IndividualProject
                         catch (Exception e)
                         {
                             Console.WriteLine(e.Message);
+                            Console.ReadKey();
                         }
                         break;
                     case "4":
@@ -88,9 +86,20 @@ namespace IndividualProject
                             var psw = Login.CheckingPassword();
                             SAdmin.ChangeUserPassword(username, psw);
                         }
-                        catch (Exception e)
+                        catch (System.IO.IOException e)
                         {
                             Console.WriteLine(e.Message);
+                            Console.ReadKey();
+                        }
+                        catch (OutOfMemoryException e)
+                        {
+                            Console.WriteLine(e.Message);
+                            Console.ReadKey();
+                        }
+                        catch (ArgumentOutOfRangeException e)
+                        {
+                            Console.WriteLine(e.Message);
+                            Console.ReadKey();
                         }
                         break;
                     case "6":
@@ -117,12 +126,12 @@ namespace IndividualProject
                         break;
                     case "0":
                     default:
+                        Console.WriteLine("\nLoged out");
                         check = false;
                         break;
                 }
             } while (check == true);
-        }
-        
+        }      
         public static void MenuUserView(string name)
         {
             var userView = new UserView();
@@ -171,9 +180,7 @@ namespace IndividualProject
                 }
             } while (check == true);
 
-        }
-
-        
+        }       
         public static void MenuUserViewEdit(string name)
         {
             var UserViewEdit = new UserViewEdit();
@@ -230,21 +237,19 @@ namespace IndividualProject
                         break;
                 }
             } while (check == true);
-        }
-
-        
+        }      
         public static void MenuUserViewEditDelete(string name)
         {
-            var Uved = new UserViewDelete();
+            var UserViewDelete = new UserViewDelete();
             bool check = true;
             do
             {
-                switch (Uved.UserMenu())
+                switch (UserViewDelete.UserMenu())
                 {
                     case "1":
                         try
                         {
-                            Uved.SendMessage(name);
+                            UserViewDelete.SendMessage(name);
                         }
                         catch (Exception e)
                         {
@@ -255,7 +260,7 @@ namespace IndividualProject
                     case "2":
                         try
                         {
-                            Uved.ViewMessages(name);
+                            UserViewDelete.ViewMessages(name);
                         }
                         catch (Exception e)
                         {
@@ -266,31 +271,34 @@ namespace IndividualProject
                     case "3":
                         try
                         {
-                            Uved.ViewUsersMessages();
+                            UserViewDelete.ViewUsersMessages();
                         }
                         catch (Exception e)
                         {
                             Console.WriteLine(e.Message);
+                            Console.ReadKey();
                         }
                         break;
                     case "4":
                         try
                         {
-                            Uved.EditMessage(name);
+                            UserViewDelete.EditMessage(name);
                         }
                         catch (Exception e)
                         {
                             Console.WriteLine(e.Message);
+                            Console.ReadKey();
                         }
                         break;
                     case "5":
                         try
                         {
-                            Uved.DeleteMessages(name);
+                            UserViewDelete.DeleteMessages(name);
                         }
                         catch (Exception e)
                         {
                             Console.WriteLine(e.Message);
+                            Console.ReadKey();
                         }
                         break;
                     case "0":
@@ -301,8 +309,6 @@ namespace IndividualProject
             } while (check == true);
 
         }
-
-
         public static void MenuUser(string name)
         {
             var User = new User();

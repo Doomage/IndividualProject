@@ -34,7 +34,7 @@ namespace IndividualProject
         {
 
             Console.Clear();
-            var MessageForFile = " " ;
+            var MessageForFile = string.Empty;
             Console.Write("Type the User Name you want to delete his messages : ");
             var Sender = Login.CheckingUsernameForChangeAccess(Console.ReadLine());
             var db = new DatabaseConnection();

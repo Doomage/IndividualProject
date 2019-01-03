@@ -17,5 +17,16 @@ namespace IndividualProject
             Console.ResetColor();
             Console.ReadKey();
         }
+
+        public static void ApplicationWrongUsernameOrPassword()
+        {
+            Console.Clear();
+            Console.SetWindowSize(110, 20);
+            Console.BackgroundColor = ConsoleColor.Red;              
+            Console.SetCursorPosition(35, 7);
+            Console.WriteLine("Wrong Username or Password");
+            Console.ResetColor();
+            Console.ReadKey();
+        }
     }
 }

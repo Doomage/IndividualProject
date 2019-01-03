@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\PrintAffected.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -59,7 +60,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Users\SuperAdmin.cs" />
-    <Compile Include="AbstractUser.cs" />
+    <Compile Include="Users\AbstractUser.cs" />
     <Compile Include="Users\UserView.cs" />
     <Compile Include="Users\UserViewEdit.cs" />
     <Compile Include="Users\UserViewDelete.cs" />

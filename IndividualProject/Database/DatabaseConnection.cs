@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Configuration;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 
@@ -11,8 +8,7 @@ namespace IndividualProject
     
 
     class DatabaseConnection
-    {
-        // private static string connectionstring = "Server= DESKTOP-OJEQUAD\\SQLEXPRESS; Database= IndividualProject;Integrated Security = SSPI;";
+    { 
         private static string connectionstring = Properties.Settings.Default.connectionString;
 
         public DatabaseConnection()
@@ -146,9 +142,7 @@ namespace IndividualProject
                 cmd.Parameters.AddWithValue("@username", name);
                 cmd.Parameters.AddWithValue("@userlevel", userlevel);
                 var affected = cmd.ExecuteNonQuery();
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"{affected} Affected rows");
-                Console.ReadKey();
+                PrintAffected.PrintAffectedRows(affected);
             }
         }
 
@@ -196,9 +190,7 @@ namespace IndividualProject
                 cmd.Parameters.AddWithValue("@username", name);
                 cmd.Parameters.AddWithValue("@password", psw);
                 var affected = cmd.ExecuteNonQuery();
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"{affected} Affected rows");
-                Console.ReadKey();
+                PrintAffected.PrintAffectedRows(affected);
             }
         }
 
@@ -216,10 +208,7 @@ namespace IndividualProject
                 cmd.Parameters.AddWithValue("@message", Message);
 
                 var affected = cmd.ExecuteNonQuery();
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"{affected} Affected rows");
-                Console.ResetColor();
-                Console.ReadKey();
+                PrintAffected.PrintAffectedRows(affected);
             }
         }
 
@@ -236,13 +225,7 @@ namespace IndividualProject
                 cmd.Parameters.AddWithValue("@MessagesId", id);
 
                 var affected = cmd.ExecuteNonQuery();
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"{affected} Affected rows");
-                Console.ResetColor();
-                Console.ForegroundColor = ConsoleColor.DarkBlue;
-                Console.WriteLine("Press enter to continue");
-                Console.ResetColor();
-                Console.ReadKey();
+                PrintAffected.PrintAffectedRows(affected);
 
             }
         }
@@ -396,13 +379,7 @@ namespace IndividualProject
                 cmd.Parameters.AddWithValue("@MessagesId", id);
                 var affected = cmd.ExecuteNonQuery();
 
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"{affected} Affected rows");
-                Console.ResetColor();
-                Console.ForegroundColor = ConsoleColor.DarkBlue;
-                Console.WriteLine("\nPress enter to continue");
-                Console.ResetColor();
-                Console.ReadKey();
+                PrintAffected.PrintAffectedRows(affected);
             }
 
         }
@@ -425,6 +402,5 @@ namespace IndividualProject
             }
 
         }
-
     }
 }

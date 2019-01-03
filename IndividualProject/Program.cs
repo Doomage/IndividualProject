@@ -12,10 +12,10 @@ namespace IndividualProject
             WelcomeMenu.ApplicationWelcomeMenu();
             do
             {
-                Console.Clear();
-                Console.WriteLine("1.Login\n2.Sign Up");
                 try
                 {
+                    Console.Clear();
+                    Console.WriteLine("1.Login\n2.Sign Up\n\n0.Exit");                   
                     var AnswerDecide = int.Parse(Console.ReadLine());
                     switch (AnswerDecide)
                     {
@@ -68,25 +68,32 @@ namespace IndividualProject
                                 }
                                 else
                                 {
-                                    Login.SignUp();
-                                    check = false;
+                                    WelcomeMenu.ApplicationWrongUsernameOrPassword();
                                 }
                                 break;
                             }
                         case 2:
-                        default:
                             {
-
-                                if (Login.SignUp() == false)
-                                {
-                                    check = false;
-                                }
+                                Login.SignUp();                              
+                                break;
+                            }
+                        default:
+                        case 0:                      
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Bye Bye");
+                                check = false;
                                 break;
                             }
                     }
                     Console.ReadKey();
-                }
-                catch (Exception e)
+                }               
+                catch (ArgumentOutOfRangeException e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.ReadKey();
+                }              
+                catch (FormatException e)
                 {
                     Console.WriteLine(e.Message);
                     Console.ReadKey();

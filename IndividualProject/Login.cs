@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Data;
-using System.Data.SqlClient;
+
 
 namespace IndividualProject
 {
@@ -11,26 +8,11 @@ namespace IndividualProject
         public Login()
         {
         }
-        public static bool SignUp()
-        {
-            
+        public static void SignUp()
+        {           
             var Sadmin = new SuperAdmin();
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("You have to create an Account to log in");
-            Console.ResetColor();
-            Console.WriteLine("Do u want to create an account? y/n");
-            string answer = Console.ReadLine();
-            switch (answer)
-            {
-                case "y":
-                    Sadmin.CreateAccount(Login.CheckingUsername(), Login.CheckingPassword());
-                    return true;
-                case "n":
-                default:
-                    Console.WriteLine("Bye Bye");
-                    return false;                    
-            }
+            Console.Clear();          
+            Sadmin.CreateAccount(Login.CheckingUsername(),Login.CheckingPassword());           
         }
         public static string CheckingUsername()
         {
@@ -47,7 +29,6 @@ namespace IndividualProject
             }
             return Name;
         }
-
         public static string CheckingUsernameForChangeAccess(string Name)
         {
             while (DatabaseConnection.ValidateUsername(Name) == false)
@@ -59,7 +40,6 @@ namespace IndividualProject
             }
             return Name;
         }
-
         public static string CheckingPassword()
         {
             Console.Write("Password : ");

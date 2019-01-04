@@ -1,2 +1,0 @@
-User test3 send to test : test3 to test
-User test3 send to test2 : test to test2

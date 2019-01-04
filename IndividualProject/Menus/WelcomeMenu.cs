@@ -6,6 +6,7 @@ namespace IndividualProject
     {
         public static void ApplicationWelcomeMenu()
         {
+            Console.Clear();
             Console.SetWindowSize(110, 20);
             Console.BackgroundColor = ConsoleColor.Red;
             Console.SetCursorPosition(35, 9);

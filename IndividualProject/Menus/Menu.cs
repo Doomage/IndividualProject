@@ -126,7 +126,7 @@ namespace IndividualProject
                         break;
                     case "0":
                     default:
-                        Console.WriteLine("\nLoged out");
+                        Console.WriteLine("\nLogged out");
                         check = false;
                         break;
                 }
@@ -175,6 +175,7 @@ namespace IndividualProject
                         break;
                     case "0":
                     default:
+                        Console.WriteLine("\nLogged out");
                         check = false;
                         break;
                 }
@@ -233,6 +234,7 @@ namespace IndividualProject
                         break;
                     case "0":
                     default:
+                        Console.WriteLine("\nLogged out");
                         check = false;
                         break;
                 }
@@ -303,6 +305,7 @@ namespace IndividualProject
                         break;
                     case "0":
                     default:
+                        Console.WriteLine("\nLogged out");
                         check = false;
                         break;
                 }
@@ -341,6 +344,7 @@ namespace IndividualProject
                         break;
                     case "0":
                     default:
+                        Console.WriteLine("\nLogged out");
                         check = false;
                         break;
                 }

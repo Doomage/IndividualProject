@@ -63,7 +63,7 @@ namespace IndividualProject
             Console.Write("\nWrite the new message : ");
             var message = Console.ReadLine();
             DatabaseConnection.UpdateMessages(message, messageid);
-            var file = new TransactedDataFile(Sender, message, name,dateTime);
+            TransactedDataFile.TransactedDataEdit(Sender, message, name,dateTime);
         }
 
         public override string UserMenu()

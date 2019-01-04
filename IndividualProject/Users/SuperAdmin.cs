@@ -8,7 +8,13 @@ namespace IndividualProject
         {   
             userlist = userenum.superadmin;
         }
-
+        public void CreateSuperAdmin()
+        {
+            if(DatabaseConnection.ValidateUsername("admin")==false)
+            {
+                CreateAccount("admin", "admin", userenum.superadmin);
+            }
+        }
         public string SuperAdminMenu()
         {
             Console.Clear();
@@ -43,6 +49,9 @@ namespace IndividualProject
                     break;
                 case userenum.usera:                    
                     dbcreate.AddAccount(name, Psw, 1);
+                    break;
+                case userenum.superadmin:
+                    dbcreate.AddAccount(name, Psw, 5);
                     break;
             }
         }

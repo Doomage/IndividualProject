@@ -4,41 +4,77 @@ using System.IO;
 namespace IndividualProject
 {
     class TransactedDataFile
-    {   
-        const string path = @"C:\Users\Γιωργος\Desktop\GitHub\IndividualProject\TransactedDataFile.txt";
+    {
+        const string DirectoryPath = @"C:\IndividualProject";
 
-        public TransactedDataFile(string Receivername, string message, string Sendername)
+        public static void TransactedDataSent(string Receivername, string message, string Sendername, DateTime dateTime)
         {
-            CheckingIfFileExists();
-            using (TextWriter text = new StreamWriter(path, true))
+            CheckingIfDirectoryExists();
+            var FilePath = CheckingIfFileExists(Sendername);
+            using (TextWriter text = new StreamWriter(FilePath, true))
             {
-                text.WriteLine($"User {Sendername} send to {Receivername} : {message}");
+                text.WriteLine($"{dateTime} User {Sendername} send to {Receivername} : {message}");
             }
         }
 
-        public TransactedDataFile(string Receivername, string message, string Sendername, DateTime dateTime)
+        public static void TransactedDataEdit(string Receivername, string message, string Sendername, DateTime dateTime)
         {
-            CheckingIfFileExists();
-            using (TextWriter text = new StreamWriter(path, true))
+            CheckingIfDirectoryExists();
+            var FilePath = CheckingIfFileExists(Sendername);
+            using (TextWriter text = new StreamWriter(FilePath, true))
             {
                 text.WriteLine($"{dateTime} User {Sendername} edit {Receivername}'s message: {message}");
             }
         }
         public static void DeleteMessageFile(string Receivername, string message, string Sendername, DateTime dateTime)
         {
-            CheckingIfFileExists();
-            using (TextWriter text = new StreamWriter(path, true))
+            CheckingIfDirectoryExists();
+            var FilePath = CheckingIfFileExists(Sendername);
+            using (TextWriter text = new StreamWriter(FilePath, true))
             {
                 text.WriteLine($"{dateTime} User {Sendername} delete {Receivername}'s message: {message}");
             }
         }
-        public static void CheckingIfFileExists()
-        {      
-            if (!File.Exists(path))
-            {
-               var myfile =  File.Create(path);
-                myfile.Close();
-            }            
+
+        private static string CheckingFileByUsername(string Sendername)
+        {
+            return @"C:\IndividualProject\" + Sendername + ".txt";
         }
+
+        public static void CheckingIfDirectoryExists()
+        {
+            try
+            {
+                if (!System.IO.Directory.Exists(DirectoryPath))
+                {
+                    Directory.CreateDirectory(DirectoryPath);
+                }
+            }
+            catch(UnauthorizedAccessException e)
+            {
+                Console.WriteLine(e.Message);
+                Console.ReadKey();
+            }
+            catch (DirectoryNotFoundException e)
+            {
+                Console.WriteLine(e.Message);
+                Console.ReadKey();
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine(e.Message);
+                Console.ReadKey();
+            }
+        }
+        public static string CheckingIfFileExists(string Sendername)
+        {            
+                if (!File.Exists(CheckingFileByUsername(Sendername)))
+                {
+                    var myfile = File.Create(CheckingFileByUsername(Sendername));
+                    myfile.Close();
+                }
+                return @"C:\IndividualProject\" + Sendername + ".txt";           
+        }
+
     }
 }

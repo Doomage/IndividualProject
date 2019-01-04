@@ -33,10 +33,10 @@ namespace IndividualProject
             Console.Clear();
             Console.Write("Type receiver name : ");
             string ReceiverName = Login.CheckingUsernameForChangeAccess(Console.ReadLine());
-            Console.WriteLine("Type the message :");
+            Console.Write("Type the message :");
             var Message = Console.ReadLine();
             db.AddMessage(name, ReceiverName, Message);
-            var file = new TransactedDataFile(ReceiverName, Message,name);
+            TransactedDataFile.TransactedDataSent(ReceiverName, Message,name,DateTime.Now);
         }
 
         public  void ViewMessages(string name)

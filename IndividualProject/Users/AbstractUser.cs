@@ -1,7 +1,7 @@
 ﻿
 namespace IndividualProject
 {
-    public enum userenum {user = 1, usera = 2, userb = 3, userc=4 ,superadmin = 5}
+    public enum userenum {user = 1, userview = 2, userviewedit = 3, uservieweditdelete=4 ,superadmin = 5}
 
     abstract class AbstractUser
     {

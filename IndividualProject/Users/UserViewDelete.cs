@@ -8,7 +8,7 @@ namespace IndividualProject
         
         public UserViewDelete() : base()
         {           
-            userlist = userenum.userc;
+            userlist = userenum.uservieweditdelete;
         }
 
         public override string UserMenu()

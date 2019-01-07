@@ -8,7 +8,7 @@ namespace IndividualProject
         
         public UserViewEdit() : base ()
         {           
-            userlist = userenum.userb;
+            userlist = userenum.userviewedit;
         }
 
         public void EditMessage(string name)

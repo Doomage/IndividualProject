@@ -35,19 +35,19 @@ namespace IndividualProject
             Console.ResetColor();
             return Console.ReadLine();
         }
-        public void CreateAccount(string name, string Psw , userenum userlist = userenum.usera )
+        public void CreateAccount(string name, string Psw , userenum userlist = userenum.userview )
         {
             var dbcreate = new DatabaseConnection();
             switch (userlist)
             {
-                case userenum.userc:
+                case userenum.uservieweditdelete:
                 default:                   
                     dbcreate.AddAccount(name, Psw, 3 );
                     break;
-                case userenum.userb:                   
+                case userenum.userviewedit:                   
                     dbcreate.AddAccount(name, Psw, 2 );
                     break;
-                case userenum.usera:                    
+                case userenum.userview:                    
                     dbcreate.AddAccount(name, Psw, 1);
                     break;
                 case userenum.superadmin:

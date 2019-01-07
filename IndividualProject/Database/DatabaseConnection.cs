@@ -167,10 +167,11 @@ namespace IndividualProject
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@username", name);
                 return Convert.ToInt32(cmd.ExecuteScalar());
+               
             }
         }
 
-        public static int GetUserAccess(string name, string password)
+        public static userenum GetUserAccess(string name, string password)
         {
             var dbcon = new SqlConnection(connectionstring);
             using (dbcon)
@@ -183,7 +184,9 @@ namespace IndividualProject
                 cmd.Parameters.AddWithValue("@Username", name);
                 cmd.Parameters.AddWithValue("@Password", password);
 
-                return Convert.ToInt32(cmd.ExecuteScalar());
+                var affected = Convert.ToInt32(cmd.ExecuteScalar());
+                
+                return (userenum)Enum.ToObject(typeof(userenum), affected);
 
             }
 

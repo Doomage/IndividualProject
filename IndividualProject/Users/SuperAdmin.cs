@@ -15,7 +15,7 @@ namespace IndividualProject
                 CreateAccount("admin", "admin", userenum.superadmin);
             }
         }
-        public string SuperAdminMenu()
+        public int SuperAdminMenu()
         {
             Console.Clear();
             Console.BackgroundColor = ConsoleColor.DarkGray;
@@ -33,7 +33,13 @@ namespace IndividualProject
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("0.Exit");
             Console.ResetColor();
-            return Console.ReadLine();
+            var answer = int.Parse( Console.ReadLine());
+            while(answer<0 || answer>7)
+            {
+                Console.WriteLine("You have to Choose between 0 and 7");
+                answer = int.Parse(Console.ReadLine());
+            }
+            return answer;
         }
         public void CreateAccount(string name, string Psw , userenum userlist = userenum.userview )
         {

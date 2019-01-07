@@ -11,7 +11,7 @@ namespace IndividualProject
             userlist = userenum.user;
         }
 
-        public virtual string UserMenu()
+        public virtual int UserMenu()
         {
             Console.Clear();
             Console.BackgroundColor = ConsoleColor.DarkGray;
@@ -24,7 +24,13 @@ namespace IndividualProject
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("0.Log Out");
             Console.ResetColor();
-            return Console.ReadLine();
+            var answer = int.Parse(Console.ReadLine());
+            while (answer < 0 || answer > 2)
+            {
+                Console.WriteLine("You have to Choose between 0 and 2");
+                answer = int.Parse(Console.ReadLine());
+            }
+            return answer;
         }
 
         public  void SendMessage(string name)

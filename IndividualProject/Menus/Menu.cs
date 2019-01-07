@@ -14,7 +14,7 @@ namespace IndividualProject
             {
                 switch (SAdmin.SuperAdminMenu())
                 {
-                    case "1":
+                    case 1:
                         try
                         {
                             SAdmin.CreateAccount(Login.CheckingUsername(), Login.CheckingPassword());
@@ -25,7 +25,7 @@ namespace IndividualProject
                             Console.ReadKey();
                         }
                         break;
-                    case "2":
+                    case 2:
                         int UserAccess;
                         try
                         {
@@ -54,7 +54,7 @@ namespace IndividualProject
                             Console.ReadKey();
                         }
                         break;
-                    case "3":
+                    case 3:
                         try
                         {
                             Console.Clear();
@@ -66,7 +66,7 @@ namespace IndividualProject
                             Console.ReadKey();
                         }
                         break;
-                    case "4":
+                    case 4:
                         try
                         {
                             SuperAdmin.RemoveAccount();
@@ -77,7 +77,7 @@ namespace IndividualProject
                             Console.ReadKey();
                         }
                         break;
-                    case "5":
+                    case 5:
                         try
                         {
                             Console.Clear();
@@ -102,7 +102,7 @@ namespace IndividualProject
                             Console.ReadKey();
                         }
                         break;
-                    case "6":
+                    case 6:
                         try
                         {
                             SAdmin.SendMessage(name);
@@ -113,7 +113,7 @@ namespace IndividualProject
                             Console.ReadKey();
                         }
                         break;
-                    case "7":
+                    case 7:
                         try
                         {
                             SAdmin.ViewMessages(name);
@@ -124,7 +124,7 @@ namespace IndividualProject
                             Console.ReadKey();
                         }
                         break;
-                    case "0":
+                    case 0:
                     default:
                         Console.WriteLine("\nLogged out");
                         check = false;
@@ -141,7 +141,7 @@ namespace IndividualProject
             {
                 switch (userView.UserMenu())
                 {
-                    case "1":
+                    case 1:
                         try
                         {
                             userView.SendMessage(name);
@@ -152,7 +152,7 @@ namespace IndividualProject
                             Console.ReadKey();
                         }
                         break;
-                    case "2":
+                    case 2:
                         try
                         {
                             userView.ViewMessages(name);
@@ -163,7 +163,7 @@ namespace IndividualProject
                             Console.ReadKey();
                         }
                         break;
-                    case "3":
+                    case 3:
                         try
                         {
                             userView.ViewUsersMessages();
@@ -173,7 +173,7 @@ namespace IndividualProject
                             Console.WriteLine(e.Message);
                         }
                         break;
-                    case "0":
+                    case 0:
                     default:
                         Console.WriteLine("\nLogged out");
                         check = false;
@@ -190,7 +190,7 @@ namespace IndividualProject
             {
                 switch (UserViewEdit.UserMenu())
                 {
-                    case "1":
+                    case 1:
                         try
                         {
                             UserViewEdit.SendMessage(name);
@@ -201,7 +201,7 @@ namespace IndividualProject
                             Console.ReadKey();
                         }
                         break;
-                    case "2":
+                    case 2:
                         try
                         {
                             UserViewEdit.ViewMessages(name);
@@ -212,7 +212,7 @@ namespace IndividualProject
                             Console.ReadKey();
                         }
                         break;
-                    case "3":
+                    case 3:
                         try
                         {
                             UserViewEdit.ViewUsersMessages();
@@ -222,7 +222,7 @@ namespace IndividualProject
                             Console.WriteLine(e.Message);
                         }
                         break;
-                    case "4":
+                    case 4:
                         try
                         {
                             UserViewEdit.EditMessage(name);
@@ -232,7 +232,7 @@ namespace IndividualProject
                             Console.WriteLine(e.Message);
                         }
                         break;
-                    case "0":
+                    case 0:
                     default:
                         Console.WriteLine("\nLogged out");
                         check = false;
@@ -248,7 +248,7 @@ namespace IndividualProject
             {
                 switch (UserViewDelete.UserMenu())
                 {
-                    case "1":
+                    case 1:
                         try
                         {
                             UserViewDelete.SendMessage(name);
@@ -259,7 +259,7 @@ namespace IndividualProject
                             Console.ReadKey();
                         }
                         break;
-                    case "2":
+                    case 2:
                         try
                         {
                             UserViewDelete.ViewMessages(name);
@@ -270,7 +270,7 @@ namespace IndividualProject
                             Console.ReadKey();
                         }
                         break;
-                    case "3":
+                    case 3:
                         try
                         {
                             UserViewDelete.ViewUsersMessages();
@@ -281,7 +281,7 @@ namespace IndividualProject
                             Console.ReadKey();
                         }
                         break;
-                    case "4":
+                    case  4:
                         try
                         {
                             UserViewDelete.EditMessage(name);
@@ -292,7 +292,7 @@ namespace IndividualProject
                             Console.ReadKey();
                         }
                         break;
-                    case "5":
+                    case 5:
                         try
                         {
                             UserViewDelete.DeleteMessages(name);
@@ -303,7 +303,7 @@ namespace IndividualProject
                             Console.ReadKey();
                         }
                         break;
-                    case "0":
+                    case 0:
                     default:
                         Console.WriteLine("\nLogged out");
                         check = false;
@@ -320,7 +320,7 @@ namespace IndividualProject
             {
                 switch (User.UserMenu())
                 {
-                    case "1":
+                    case 1:
                         try
                         {
                             User.SendMessage(name);                            
@@ -331,7 +331,7 @@ namespace IndividualProject
                             Console.ReadKey();
                         }
                         break;
-                    case "2":
+                    case 2:
                         try
                         {
                             User.ViewMessages(name);
@@ -342,7 +342,7 @@ namespace IndividualProject
                             Console.ReadKey();
                         }
                         break;
-                    case "0":
+                    case 0:
                     default:
                         Console.WriteLine("\nLogged out");
                         check = false;

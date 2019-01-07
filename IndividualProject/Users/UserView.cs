@@ -9,7 +9,7 @@ namespace IndividualProject
         {            
             userlist = userenum.userview;
         }
-        public override string UserMenu()
+        public override int UserMenu()
         {
             Console.Clear();
             Console.BackgroundColor = ConsoleColor.DarkGray;
@@ -23,7 +23,13 @@ namespace IndividualProject
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("\n0.Log Out");
             Console.ResetColor();
-            return Console.ReadLine();
+            var answer = int.Parse(Console.ReadLine());
+            while (answer < 0 || answer > 3)
+            {
+                Console.WriteLine("You have to Choose between 0 and 3");
+                answer = int.Parse(Console.ReadLine());
+            }
+            return answer;
         }
         
         public void ViewUsersMessages()

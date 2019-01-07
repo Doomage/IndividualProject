@@ -184,9 +184,7 @@ namespace IndividualProject
                 cmd.Parameters.AddWithValue("@Username", name);
                 cmd.Parameters.AddWithValue("@Password", password);
 
-                var affected = Convert.ToInt32(cmd.ExecuteScalar());
-                
-                return (userenum)Enum.ToObject(typeof(userenum), affected);
+                return (userenum)Convert.ToInt32(cmd.ExecuteScalar());  
 
             }
 

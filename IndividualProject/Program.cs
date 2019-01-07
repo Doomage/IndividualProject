@@ -9,8 +9,8 @@ namespace IndividualProject
             Console.Title = "Project Chat";
             SuperAdmin Sadmin = new SuperAdmin();
             Sadmin.CreateSuperAdmin();
-            var check = true;
             WelcomeMenu.ApplicationWelcomeMenu();
+            var check = true;           
             do
             {
                 try

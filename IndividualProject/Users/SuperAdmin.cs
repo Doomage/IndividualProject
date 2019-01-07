@@ -64,8 +64,10 @@ namespace IndividualProject
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write(" delete : ");
             Console.ResetColor();
-
-            bdremove.RemoveAccount(Login.CheckingUsernameForChangeAccess(Console.ReadLine()));
+            var username = Login.CheckingUsernameForChangeAccess(Console.ReadLine());
+            bdremove.RemoveAccount(username);
+            bdremove.RemoveMessages(username);
+            TransactedDataFile.DeleteUserFile(username);
         }
         
         public void ViewUsersTable()

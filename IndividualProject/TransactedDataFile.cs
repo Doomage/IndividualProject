@@ -76,5 +76,12 @@ namespace IndividualProject
                 return @"C:\IndividualProject\" + Sendername + ".txt";           
         }
 
+        public static void DeleteUserFile(string name)
+        {
+            CheckingIfDirectoryExists();
+            var Filepath = CheckingIfFileExists(name);
+            File.Delete(Filepath);
+        }
+
     }
 }

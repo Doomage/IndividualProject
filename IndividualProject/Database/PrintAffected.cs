@@ -7,6 +7,7 @@ namespace IndividualProject
 
         public static void PrintAffectedRows(int affected)
         {
+            
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"{affected} Affected rows");
             Console.ResetColor();

@@ -57,10 +57,10 @@ namespace IndividualProject
                 cmd.Parameters.AddWithValue("@PersonAccess", PersonAccess);
 
                 var affected = cmd.ExecuteNonQuery();
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"{affected} Affected rows");
-                Console.ResetColor();
-                Console.ReadKey();
+                if (username != "admin")
+                {
+                    PrintAffected.PrintAffectedRows(affected);
+                }
             }
 
         }
@@ -76,14 +76,24 @@ namespace IndividualProject
                 cmd.Parameters.AddWithValue("@username", username);
 
                 var affected = cmd.ExecuteNonQuery();
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"{affected} Affected rows");
-                Console.ResetColor();
-                Console.ReadKey();
+                PrintAffected.PrintAffectedRows(affected);
             }
 
         }
+        public void RemoveMessages(string username)
+        {
+            var dbcon = new SqlConnection(connectionstring);
+            using (dbcon)
+            {
+                dbcon.Open();
+                var cmd = new SqlCommand("RemoveMessagesByUsername", dbcon);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@username", username);
 
+                cmd.ExecuteNonQuery();
+                
+            }
+        }
         public static bool ValidateAccount(string name, string password)
         {
             var dbcon = new SqlConnection(connectionstring);

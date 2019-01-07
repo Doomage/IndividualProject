@@ -79,8 +79,8 @@ namespace IndividualProject
         public static void DeleteUserFile(string name)
         {
             CheckingIfDirectoryExists();
-            var Filepath = CheckingIfFileExists(name);
-            File.Delete(Filepath);
+            var FilePath = CheckingIfFileExists(name);
+            File.Delete(FilePath);
         }
 
     }

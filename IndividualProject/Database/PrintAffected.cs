@@ -11,7 +11,7 @@ namespace IndividualProject
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"{affected} Affected rows");
             Console.ResetColor();
-            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Press enter to continue");
             Console.ResetColor();
             Console.ReadKey();

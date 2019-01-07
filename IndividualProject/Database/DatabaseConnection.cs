@@ -9,7 +9,7 @@ namespace IndividualProject
 
     class DatabaseConnection
     { 
-        private static string connectionstring = Properties.Settings.Default.connectionString;
+        private readonly static string connectionstring = Properties.Settings.Default.connectionString;
 
         public DatabaseConnection()
         {

@@ -40,9 +40,14 @@ namespace IndividualProject
             Console.Clear();
             List<Accounts> list = db.SelectAccountTable();
             Console.WriteLine("------Users u can send message-----");
+            
             foreach(var x in list)
             {
-                Console.Write($"{x.Username}  ");
+                Console.BackgroundColor = ConsoleColor.Gray;
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.Write($"{x.Username}");
+                Console.ResetColor();
+                Console.Write(" ");
             }
             Console.Write("\nType receiver name : ");
             string ReceiverName = Login.CheckingUsernameForChangeAccess(Console.ReadLine());
@@ -51,7 +56,7 @@ namespace IndividualProject
             db.AddMessage(name, ReceiverName, Message);
             TransactedDataFile.TransactedDataSent(ReceiverName, Message, name, DateTime.Now);
         }
-
+         
         public void ViewMessages(string name)
         {
             var db = new DatabaseConnection();

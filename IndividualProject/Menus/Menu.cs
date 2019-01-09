@@ -5,7 +5,7 @@ namespace IndividualProject
     public class Menu
     {
         DatabaseConnection db = new DatabaseConnection();
-       
+
         public static void MenuSuperAdmin(string name)
         {
             var SAdmin = new SuperAdmin();
@@ -131,7 +131,7 @@ namespace IndividualProject
                         break;
                 }
             } while (check == true);
-        }      
+        }
         public static void MenuUserView(string name)
         {
             var userView = new UserView();
@@ -181,7 +181,7 @@ namespace IndividualProject
                 }
             } while (check == true);
 
-        }       
+        }
         public static void MenuUserViewEdit(string name)
         {
             var UserViewEdit = new UserViewEdit();
@@ -191,46 +191,16 @@ namespace IndividualProject
                 switch (UserViewEdit.UserMenu())
                 {
                     case 1:
-                        try
-                        {
-                            UserViewEdit.SendMessage(name);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                            Console.ReadKey();
-                        }
+                        UserViewEdit.SendMessage(name);
                         break;
-                    case 2:
-                        try
-                        {
-                            UserViewEdit.ViewMessages(name);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                            Console.ReadKey();
-                        }
+                    case 2:                      
+                            UserViewEdit.ViewMessages(name);                      
                         break;
-                    case 3:
-                        try
-                        {
-                            UserViewEdit.ViewUsersMessages();
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                        }
+                    case 3:                        
+                            UserViewEdit.ViewUsersMessages();            
                         break;
-                    case 4:
-                        try
-                        {
-                            UserViewEdit.EditMessage(name);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                        }
+                    case 4:                        
+                            UserViewEdit.EditMessage(name);                                                                     
                         break;
                     case 0:
                     default:
@@ -239,7 +209,7 @@ namespace IndividualProject
                         break;
                 }
             } while (check == true);
-        }      
+        }
         public static void MenuUserViewEditDelete(string name)
         {
             var UserViewDelete = new UserViewDelete();
@@ -281,7 +251,7 @@ namespace IndividualProject
                             Console.ReadKey();
                         }
                         break;
-                    case  4:
+                    case 4:
                         try
                         {
                             UserViewDelete.EditMessage(name);
@@ -323,7 +293,7 @@ namespace IndividualProject
                     case 1:
                         try
                         {
-                            User.SendMessage(name);                            
+                            User.SendMessage(name);
                         }
                         catch (Exception e)
                         {

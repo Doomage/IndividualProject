@@ -171,7 +171,7 @@ namespace IndividualProject
             }
         }
 
-        public static userenum GetUserAccess(string name, string password)
+        public static UserEnum GetUserAccess(string name, string password)
         {
             var dbcon = new SqlConnection(connectionstring);
             using (dbcon)
@@ -184,7 +184,7 @@ namespace IndividualProject
                 cmd.Parameters.AddWithValue("@Username", name);
                 cmd.Parameters.AddWithValue("@Password", password);
 
-                return (userenum)Convert.ToInt32(cmd.ExecuteScalar());  
+                return (UserEnum)Convert.ToInt32(cmd.ExecuteScalar());  
 
             }
 

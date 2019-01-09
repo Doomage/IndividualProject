@@ -6,13 +6,13 @@ namespace IndividualProject
     {        
         public SuperAdmin()
         {   
-            userlist = userenum.superadmin;
+            UserList = UserEnum.superadmin;
         }
         public void CreateSuperAdmin()
         {
             if(DatabaseConnection.ValidateUsername("admin")==false)
             {
-                CreateAccount("admin", "admin", userenum.superadmin);
+                CreateAccount("admin", "admin", UserEnum.superadmin);
             }
         }
         public int SuperAdminMenu()
@@ -41,22 +41,22 @@ namespace IndividualProject
             }
             return answer;
         }
-        public void CreateAccount(string name, string Psw , userenum userlist = userenum.userview )
+        public void CreateAccount(string name, string Psw , UserEnum userlist = UserEnum.userview )
         {
             var dbcreate = new DatabaseConnection();
             switch (userlist)
             {
-                case userenum.uservieweditdelete:
+                case UserEnum.uservieweditdelete:
                 default:                   
                     dbcreate.AddAccount(name, Psw, 3 );
                     break;
-                case userenum.userviewedit:                   
+                case UserEnum.userviewedit:                   
                     dbcreate.AddAccount(name, Psw, 2 );
                     break;
-                case userenum.userview:                    
+                case UserEnum.userview:                    
                     dbcreate.AddAccount(name, Psw, 1);
                     break;
-                case userenum.superadmin:
+                case UserEnum.superadmin:
                     dbcreate.AddAccount(name, Psw, 5);
                     break;
             }

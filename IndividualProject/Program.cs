@@ -40,27 +40,27 @@ namespace IndividualProject
                                     var UserAccess = DatabaseConnection.GetUserAccess(name, psw);
                                     switch (UserAccess)
                                     {
-                                        case userenum.superadmin:
+                                        case UserEnum.superadmin:
                                             {
                                                 Menu.MenuSuperAdmin(name);
                                             }
                                             break;
-                                        case userenum.uservieweditdelete:
+                                        case UserEnum.uservieweditdelete:
                                             {
                                                 Menu.MenuUserViewEditDelete(name);
                                             }
                                             break;
-                                        case userenum.userviewedit:
+                                        case UserEnum.userviewedit:
                                             {
                                                 Menu.MenuUserViewEdit(name);
                                             }
                                             break;
-                                        case userenum.userview:
+                                        case UserEnum.userview:
                                             {
                                                 Menu.MenuUserView(name);
                                             }
                                             break;
-                                        case userenum.user:
+                                        case UserEnum.user:
                                         default:
                                             {
                                                 Menu.MenuUser(name);

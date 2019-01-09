@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace IndividualProject
 {
@@ -8,7 +9,7 @@ namespace IndividualProject
 
         public User()
         {
-            userlist = userenum.user;
+            UserList = UserEnum.user;
         }
 
         public virtual int UserMenu()
@@ -33,19 +34,25 @@ namespace IndividualProject
             return answer;
         }
 
-        public  void SendMessage(string name)
+        public void SendMessage(string name)
         {
             var db = new DatabaseConnection();
             Console.Clear();
-            Console.Write("Type receiver name : ");
+            List<Accounts> list = db.SelectAccountTable();
+            Console.WriteLine("------Users u can send message-----");
+            foreach(var x in list)
+            {
+                Console.Write($"{x.Username}  ");
+            }
+            Console.Write("\nType receiver name : ");
             string ReceiverName = Login.CheckingUsernameForChangeAccess(Console.ReadLine());
             Console.Write("Type the message :");
             var Message = Console.ReadLine();
             db.AddMessage(name, ReceiverName, Message);
-            TransactedDataFile.TransactedDataSent(ReceiverName, Message,name,DateTime.Now);
+            TransactedDataFile.TransactedDataSent(ReceiverName, Message, name, DateTime.Now);
         }
 
-        public  void ViewMessages(string name)
+        public void ViewMessages(string name)
         {
             var db = new DatabaseConnection();
             var list = db.ViewMessagesByName(name);
@@ -55,9 +62,9 @@ namespace IndividualProject
             {
                 Console.WriteLine($"{x.TimeSent} - {x.SenderName} send to {x.ReceiverName} : {x.Message}");
             }
-            if (list.Count ==0)
-            {
+            if (list.Count == 0)
                 Console.WriteLine("You have no messages");
+            {
             }
             Console.ForegroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine("\nPress enter to continue");

@@ -7,7 +7,7 @@ namespace IndividualProject
         
         public UserView()
         {            
-            userlist = userenum.userview;
+            UserList = UserEnum.userview;
         }
         public override int UserMenu()
         {

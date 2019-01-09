@@ -55,6 +55,10 @@ namespace IndividualProject
             {
                 Console.WriteLine($"{x.TimeSent} - {x.SenderName} send to {x.ReceiverName} : {x.Message}");
             }
+            if (list.Count ==0)
+            {
+                Console.WriteLine("You have no messages");
+            }
             Console.ForegroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine("\nPress enter to continue");
             Console.ResetColor();

@@ -60,7 +60,8 @@ namespace IndividualProject
             Console.Write("Type the message :");
             var Message = Console.ReadLine();
             db.AddMessage(name, ReceiverName, Message);
-            TransactedDataFile.TransactedDataSent(ReceiverName, Message, name, DateTime.Now);
+            var file = new TransactedDataFile();
+            file.TransactedDataSent(ReceiverName, Message, name, DateTime.Now);
         }
 
         public void ViewMessages(string name)

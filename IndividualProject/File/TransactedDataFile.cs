@@ -1,13 +1,15 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace IndividualProject
 {
     class TransactedDataFile
     {
-        const string DirectoryPath = @"C:\IndividualProject";
+        private string DirectoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "IndividualProjectTextFiles");
 
-        public static void TransactedDataSent(string Receivername, string message, string Sendername, DateTime dateTime)
+        public  void TransactedDataSent(string Receivername, string message, string Sendername, DateTime dateTime)
         {
             CheckingIfDirectoryExists();
             var FilePath = CheckingIfFileExists(Sendername);
@@ -17,7 +19,7 @@ namespace IndividualProject
             }
         }
 
-        public static void TransactedDataEdit(string Receivername, string message, string Sendername, DateTime dateTime)
+        public  void TransactedDataEdit(string Receivername, string message, string Sendername, DateTime dateTime)
         {
             CheckingIfDirectoryExists();
             var FilePath = CheckingIfFileExists(Sendername);
@@ -26,7 +28,8 @@ namespace IndividualProject
                 text.WriteLine($"{dateTime} User {Sendername} edit {Receivername}'s message: {message}");
             }
         }
-        public static void DeleteMessageFile(string Receivername, string message, string Sendername, DateTime dateTime)
+
+        public  void DeleteMessageFile(string Receivername, string message, string Sendername, DateTime dateTime)
         {
             CheckingIfDirectoryExists();
             var FilePath = CheckingIfFileExists(Sendername);
@@ -36,21 +39,21 @@ namespace IndividualProject
             }
         }
 
-        private static string CheckingFileByUsername(string Sendername)
+        private  string CheckingFileByUsername(string Sendername)
         {
-            return @"C:\IndividualProject\" + Sendername + ".txt";
+            return DirectoryPath + "\\" + Sendername + ".txt";
         }
 
-        public static void CheckingIfDirectoryExists()
+        public  void CheckingIfDirectoryExists()
         {
             try
             {
-                if (!System.IO.Directory.Exists(DirectoryPath))
+                if (!Directory.Exists(DirectoryPath))
                 {
-                    Directory.CreateDirectory(DirectoryPath);
+                    Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "IndividualProjectTextFiles"));                    
                 }
             }
-            catch(UnauthorizedAccessException e)
+            catch (UnauthorizedAccessException e)
             {
                 Console.WriteLine(e.Message);
                 Console.ReadKey();
@@ -66,22 +69,33 @@ namespace IndividualProject
                 Console.ReadKey();
             }
         }
-        public static string CheckingIfFileExists(string Sendername)
-        {            
+
+        public  string CheckingIfFileExists(string Sendername)
+        {
+            try
+            {
                 if (!File.Exists(CheckingFileByUsername(Sendername)))
                 {
                     var myfile = File.Create(CheckingFileByUsername(Sendername));
                     myfile.Close();
                 }
-                return @"C:\IndividualProject\" + Sendername + ".txt";           
+            }
+            catch (FileNotFoundException FNFE)
+            {
+                Console.WriteLine(FNFE.Message);
+            }
+
+            return DirectoryPath +"\\" + Sendername + ".txt";
         }
 
-        public static void DeleteUserFile(string name)
+        public  void DeleteUserFile(string name)
         {
             CheckingIfDirectoryExists();
             var FilePath = CheckingIfFileExists(name);
             File.Delete(FilePath);
         }
-
     }
 }
+
+
+

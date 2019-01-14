@@ -6,7 +6,7 @@ namespace IndividualProject
     {
         DatabaseConnection db = new DatabaseConnection();
 
-        public static void MenuSuperAdmin(string name)
+        public  void MenuSuperAdmin(string name)
         {
             var SAdmin = new SuperAdmin();
             bool check = true;
@@ -14,16 +14,8 @@ namespace IndividualProject
             {
                 switch (SAdmin.SuperAdminMenu())
                 {
-                    case 1:
-                        try
-                        {
-                            SAdmin.CreateAccount(Login.CheckingUsername(), Login.CheckingPassword());
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                            Console.ReadKey();
-                        }
+                    case 1:                        
+                            SAdmin.CreateAccount(Login.CheckingUsername(), Login.CheckingPassword());                                            
                         break;
                     case 2:
                         int UserAccess;
@@ -48,34 +40,28 @@ namespace IndividualProject
                             } while (UserAccess < 1 || UserAccess > 4);
                             SAdmin.ChangeUserAccess(username, UserAccess);
                         }
-                        catch (Exception e)
+                        catch (System.IO.IOException e)
+                        {
+                            Console.WriteLine(e.Message);
+                            Console.ReadKey();
+                        }
+                        catch (OutOfMemoryException e)
+                        {
+                            Console.WriteLine(e.Message);
+                            Console.ReadKey();
+                        }
+                        catch (ArgumentOutOfRangeException e)
                         {
                             Console.WriteLine(e.Message);
                             Console.ReadKey();
                         }
                         break;
-                    case 3:
-                        try
-                        {
+                    case 3:                        
                             Console.Clear();
-                            SAdmin.ViewUsersTable();
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                            Console.ReadKey();
-                        }
+                            SAdmin.ViewUsersTable();                                             
                         break;
-                    case 4:
-                        try
-                        {
-                            SuperAdmin.RemoveAccount();
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                            Console.ReadKey();
-                        }
+                    case 4:                       
+                            SAdmin.RemoveAccount();                        
                         break;
                     case 5:
                         try
@@ -103,26 +89,16 @@ namespace IndividualProject
                         }
                         break;
                     case 6:
-                        try
-                        {
+                        
                             SAdmin.SendMessage(name);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                            Console.ReadKey();
-                        }
+                        
+                        
                         break;
                     case 7:
-                        try
-                        {
+                        
                             SAdmin.ViewMessages(name);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                            Console.ReadKey();
-                        }
+                        
+                        
                         break;
                     case 0:
                     default:
@@ -132,7 +108,7 @@ namespace IndividualProject
                 }
             } while (check == true);
         }
-        public static void MenuUserView(string name)
+        public  void MenuUserView(string name)
         {
             var userView = new UserView();
 
@@ -142,36 +118,23 @@ namespace IndividualProject
                 switch (userView.UserMenu())
                 {
                     case 1:
-                        try
-                        {
+                        
+                       
                             userView.SendMessage(name);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                            Console.ReadKey();
-                        }
+                       
+                        
                         break;
                     case 2:
-                        try
-                        {
+                        
                             userView.ViewMessages(name);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                            Console.ReadKey();
-                        }
+                        
+                        
                         break;
                     case 3:
-                        try
-                        {
+                        
                             userView.ViewUsersMessages();
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                        }
+                        
+                        
                         break;
                     case 0:
                     default:
@@ -182,7 +145,7 @@ namespace IndividualProject
             } while (check == true);
 
         }
-        public static void MenuUserViewEdit(string name)
+        public  void MenuUserViewEdit(string name)
         {
             var UserViewEdit = new UserViewEdit();
             bool check = true;
@@ -210,7 +173,7 @@ namespace IndividualProject
                 }
             } while (check == true);
         }
-        public static void MenuUserViewEditDelete(string name)
+        public  void MenuUserViewEditDelete(string name)
         {
             var UserViewDelete = new UserViewDelete();
             bool check = true;
@@ -282,7 +245,7 @@ namespace IndividualProject
             } while (check == true);
 
         }
-        public static void MenuUser(string name)
+        public  void MenuUser(string name)
         {
             var User = new User();
             bool check = true;

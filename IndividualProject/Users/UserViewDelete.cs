@@ -90,7 +90,8 @@ namespace IndividualProject
                         messageid = int.Parse(Console.ReadLine());
                     }
             } while (checkmesssageid == true);
-            TransactedDataFile.DeleteMessageFile(Sender, MessageForFile, name, DateTime.Now);
+            var file = new TransactedDataFile();
+            file.DeleteMessageFile(Sender, MessageForFile, name, DateTime.Now);
         }
     }
 }

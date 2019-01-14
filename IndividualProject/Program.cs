@@ -38,32 +38,33 @@ namespace IndividualProject
                                     Console.ReadKey();
                                     Console.ResetColor();
                                     var UserAccess = DatabaseConnection.GetUserAccess(name, psw);
+                                    var menu = new Menu();
                                     switch (UserAccess)
                                     {
                                         case UserEnum.superadmin:
                                             {
-                                                Menu.MenuSuperAdmin(name);
+                                                menu.MenuSuperAdmin(name);
                                             }
                                             break;
                                         case UserEnum.uservieweditdelete:
                                             {
-                                                Menu.MenuUserViewEditDelete(name);
+                                                menu.MenuUserViewEditDelete(name);
                                             }
                                             break;
                                         case UserEnum.userviewedit:
                                             {
-                                                Menu.MenuUserViewEdit(name);
+                                                menu.MenuUserViewEdit(name);
                                             }
                                             break;
                                         case UserEnum.userview:
                                             {
-                                                Menu.MenuUserView(name);
+                                                menu.MenuUserView(name);
                                             }
                                             break;
                                         case UserEnum.user:
                                         default:
                                             {
-                                                Menu.MenuUser(name);
+                                                menu.MenuUser(name);
                                             }
                                             break;
                                     }

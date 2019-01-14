@@ -66,7 +66,7 @@ namespace IndividualProject
             }
         }
         
-        public static void RemoveAccount()
+        public  void RemoveAccount()
         {
             var bdremove = new DatabaseConnection();
             Console.Clear();
@@ -77,7 +77,8 @@ namespace IndividualProject
             var username = Login.CheckingUsernameForChangeAccess(Console.ReadLine());
             bdremove.RemoveAccount(username);
             bdremove.RemoveMessages(username);
-            TransactedDataFile.DeleteUserFile(username);
+            var file = new TransactedDataFile();
+            file.DeleteUserFile(username);
         }
         
         public void ViewUsersTable()

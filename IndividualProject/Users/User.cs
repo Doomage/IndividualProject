@@ -14,6 +14,8 @@ namespace IndividualProject
 
         public virtual int UserMenu()
         {
+
+
             Console.Clear();
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.ForegroundColor = ConsoleColor.Red;
@@ -25,7 +27,11 @@ namespace IndividualProject
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("0.Log Out");
             Console.ResetColor();
-            var answer = int.Parse(Console.ReadLine());
+            int answer;  
+            while(!int.TryParse(Console.ReadLine(),out answer))
+            {
+                Console.WriteLine("You have to Choose a number");
+            }
             while (answer < 0 || answer > 2)
             {
                 Console.WriteLine("You have to Choose between 0 and 2");
@@ -40,8 +46,8 @@ namespace IndividualProject
             Console.Clear();
             List<Accounts> list = db.SelectAccountTable();
             Console.WriteLine("------Users u can send message-----");
-            
-            foreach(var x in list)
+
+            foreach (var x in list)
             {
                 Console.BackgroundColor = ConsoleColor.Gray;
                 Console.ForegroundColor = ConsoleColor.Black;
@@ -56,7 +62,7 @@ namespace IndividualProject
             db.AddMessage(name, ReceiverName, Message);
             TransactedDataFile.TransactedDataSent(ReceiverName, Message, name, DateTime.Now);
         }
-         
+
         public void ViewMessages(string name)
         {
             var db = new DatabaseConnection();

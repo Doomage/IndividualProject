@@ -23,7 +23,11 @@ namespace IndividualProject
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("\n0.Log Out");
             Console.ResetColor();
-            var answer = int.Parse(Console.ReadLine());
+            int answer;
+            while (!int.TryParse(Console.ReadLine(), out answer))
+            {
+                Console.WriteLine("You have to Choose a number");
+            }
             while (answer < 0 || answer > 3)
             {
                 Console.WriteLine("You have to Choose between 0 and 3");

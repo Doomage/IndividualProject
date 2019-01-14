@@ -193,14 +193,14 @@ namespace IndividualProject
                     case 1:
                         UserViewEdit.SendMessage(name);
                         break;
-                    case 2:                      
-                            UserViewEdit.ViewMessages(name);                      
+                    case 2:
+                        UserViewEdit.ViewMessages(name);
                         break;
-                    case 3:                        
-                            UserViewEdit.ViewUsersMessages();            
+                    case 3:
+                        UserViewEdit.ViewUsersMessages();
                         break;
-                    case 4:                        
-                            UserViewEdit.EditMessage(name);                                                                     
+                    case 4:
+                        UserViewEdit.EditMessage(name);
                         break;
                     case 0:
                     default:
@@ -291,26 +291,10 @@ namespace IndividualProject
                 switch (User.UserMenu())
                 {
                     case 1:
-                        try
-                        {
-                            User.SendMessage(name);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                            Console.ReadKey();
-                        }
+                        User.SendMessage(name);
                         break;
                     case 2:
-                        try
-                        {
-                            User.ViewMessages(name);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                            Console.ReadKey();
-                        }
+                        User.ViewMessages(name);
                         break;
                     case 0:
                     default:

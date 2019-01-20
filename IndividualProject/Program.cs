@@ -10,7 +10,8 @@ namespace IndividualProject
             SuperAdmin Sadmin = new SuperAdmin();
             Sadmin.CreateSuperAdmin();
             WelcomeMenu.ApplicationWelcomeMenu();
-            var check = true;           
+            var check = true;
+            var db = new DatabaseConnection();
             do
             {
                 try
@@ -26,42 +27,42 @@ namespace IndividualProject
                                 Console.Clear();
 
                                 Console.BackgroundColor = ConsoleColor.DarkBlue;
-                                Console.WriteLine("Add username and passowrd to login\n");
+                                Console.WriteLine("Add username and password to login\n");
                                 Console.ResetColor();
                                 Console.Write("Username : ");
                                 string name = Console.ReadLine();
                                 var psw = Login.CheckingPassword();
-                                if (DatabaseConnection.ValidateAccount(name, psw))
+                                if (db.ValidateAccount(name, psw))
                                 {
                                     Console.ForegroundColor = ConsoleColor.Green;
                                     Console.WriteLine("You login");
                                     Console.ReadKey();
                                     Console.ResetColor();
-                                    var UserAccess = DatabaseConnection.GetUserAccess(name, psw);
+                                    var UserAccess = db.GetUserAccess(name, psw);
                                     var menu = new Menu();
                                     switch (UserAccess)
                                     {
-                                        case UserEnum.superadmin:
+                                        case UserRole.Superadmin:
                                             {
                                                 menu.MenuSuperAdmin(name);
                                             }
                                             break;
-                                        case UserEnum.uservieweditdelete:
+                                        case UserRole.Uservieweditdelete:
                                             {
                                                 menu.MenuUserViewEditDelete(name);
                                             }
                                             break;
-                                        case UserEnum.userviewedit:
+                                        case UserRole.Userviewedit:
                                             {
                                                 menu.MenuUserViewEdit(name);
                                             }
                                             break;
-                                        case UserEnum.userview:
+                                        case UserRole.Userview:
                                             {
                                                 menu.MenuUserView(name);
                                             }
                                             break;
-                                        case UserEnum.user:
+                                        case UserRole.User:
                                         default:
                                             {
                                                 menu.MenuUser(name);

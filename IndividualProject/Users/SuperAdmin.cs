@@ -1,18 +1,20 @@
-﻿using System;
+﻿
+using System;
 
 namespace IndividualProject
 {
-    class SuperAdmin : User
+    class SuperAdmin : UserViewDelete
     {        
         public SuperAdmin()
         {   
-            UserList = UserEnum.superadmin;
+            Role = UserRole.Superadmin;
         }
         public void CreateSuperAdmin()
         {
-            if(DatabaseConnection.ValidateUsername("admin")==false)
+            var db = new DatabaseConnection();
+            if(db.ValidateUsername("admin")==false)
             {
-                CreateAccount("admin", "admin", UserEnum.superadmin);
+                CreateAccount("admin", "admin", UserRole.Superadmin);
             }
         }
         public int SuperAdminMenu()
@@ -30,38 +32,43 @@ namespace IndividualProject
             Console.WriteLine("5. Update User password");
             Console.WriteLine("6. Send a Message");
             Console.WriteLine("7. View Your Messages");
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine("0.Exit");
+            Console.WriteLine("8. View transacted message between 2 users");
+            Console.WriteLine("9. Edit messages between 2 users");
+            Console.WriteLine("10. Delete a message");
+            //Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("\n0.Logout");
             Console.ResetColor();
             int answer;
             while (!int.TryParse(Console.ReadLine(), out answer))
             {
                 Console.WriteLine("You have to Choose a number");
             }
-            while (answer<0 || answer>7)
+            while (answer<0 || answer>10)
             {
-                Console.WriteLine("You have to Choose between 0 and 7");
+                Console.WriteLine("You have to Choose between 0 and 10");
                 answer = int.Parse(Console.ReadLine());
             }
             return answer;
         }
-        public void CreateAccount(string name, string Psw , UserEnum userlist = UserEnum.userview )
+        public void CreateAccount(string name, string Psw , UserRole userlist = UserRole.User )
         {
             var dbcreate = new DatabaseConnection();
             switch (userlist)
             {
-                case UserEnum.uservieweditdelete:
-                default:                   
+                case UserRole.Uservieweditdelete:                                   
+                    dbcreate.AddAccount(name, Psw, 4 );
+                    break;
+                case UserRole.Userviewedit:                   
                     dbcreate.AddAccount(name, Psw, 3 );
                     break;
-                case UserEnum.userviewedit:                   
-                    dbcreate.AddAccount(name, Psw, 2 );
-                    break;
-                case UserEnum.userview:                    
+                case UserRole.User:                    
                     dbcreate.AddAccount(name, Psw, 1);
                     break;
-                case UserEnum.superadmin:
+                case UserRole.Superadmin:
                     dbcreate.AddAccount(name, Psw, 5);
+                    break;
+                case UserRole.Userview:
+                    dbcreate.AddAccount(name, Psw, 2);
                     break;
             }
         }
@@ -91,7 +98,7 @@ namespace IndividualProject
                 Console.Write("Username : ");
                 Console.ResetColor();
                 Console.Write(x.Username);
-                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write(" Access : ");
                 Console.ResetColor();
                 if (x.Userlevel == 1)
@@ -104,7 +111,7 @@ namespace IndividualProject
                 }
                 else if (x.Userlevel == 3)
                 {
-                    Console.Write("UserViewEditDelete" + "\n");
+                    Console.Write("UserViewEdit" + "\n");
                 }
                 else if (x.Userlevel == 4)
                 {

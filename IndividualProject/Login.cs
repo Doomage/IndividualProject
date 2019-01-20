@@ -29,7 +29,8 @@ namespace IndividualProject
                 Name = Console.ReadLine();
                 Console.Clear();
             }
-            while (DatabaseConnection.ValidateUsername(Name) == true)
+            var db = new DatabaseConnection();
+            while(db.ValidateUsername(Name) == true)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("You have to choose an other username");
@@ -40,7 +41,8 @@ namespace IndividualProject
         }
         public static string CheckingUsernameForChangeAccess(string Name)
         {
-            while (DatabaseConnection.ValidateUsername(Name) == false)
+            var db = new DatabaseConnection();
+            while (db.ValidateUsername(Name) == false)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("You have to choose an other username : ");

@@ -9,7 +9,7 @@ namespace IndividualProject
 
         public User()
         {
-            UserList = UserEnum.user;
+            Role = UserRole.User;
         }
 
         public virtual int UserMenu()
@@ -24,8 +24,8 @@ namespace IndividualProject
             Console.WriteLine();
             Console.WriteLine("1.Send a Message");
             Console.WriteLine("2.View your Messages");
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine("0.Log Out");
+            //Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("\n0.Log Out");
             Console.ResetColor();
             int answer;  
             while(!int.TryParse(Console.ReadLine(),out answer))
@@ -67,8 +67,8 @@ namespace IndividualProject
         public void ViewMessages(string name)
         {
             var db = new DatabaseConnection();
-            var list = db.ViewMessagesByName(name);
-            list.Sort((x, y) => string.Compare(Convert.ToString(x.TimeSent), Convert.ToString(y.TimeSent)));
+            var list = db.ViewMessagesByName(name);           
+            list.Sort((x, y) => x.TimeSent.CompareTo(y.TimeSent));
             Console.Clear();
             foreach (var x in list)
             {

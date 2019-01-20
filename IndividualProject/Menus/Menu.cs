@@ -10,6 +10,7 @@ namespace IndividualProject
         {
             var SAdmin = new SuperAdmin();
             bool check = true;
+            var db = new DatabaseConnection();
             do
             {
                 switch (SAdmin.SuperAdminMenu())
@@ -26,7 +27,7 @@ namespace IndividualProject
                             string Name = Console.ReadLine();
                             var username = Login.CheckingUsernameForChangeAccess(Name);
                             Console.ForegroundColor = ConsoleColor.Blue;
-                            Console.WriteLine($"User {username} has level { DatabaseConnection.SelectUserlevelByUsername(username)} Access ");
+                            Console.WriteLine($"User {username} has level { db.SelectUserlevelByUsername(username)} Access ");
                             Console.ResetColor();
                             Console.WriteLine("Give Access level u want to grand");
                             Console.WriteLine("1.User");
@@ -41,11 +42,6 @@ namespace IndividualProject
                             SAdmin.ChangeUserAccess(username, UserAccess);
                         }
                         catch (System.IO.IOException e)
-                        {
-                            Console.WriteLine(e.Message);
-                            Console.ReadKey();
-                        }
-                        catch (OutOfMemoryException e)
                         {
                             Console.WriteLine(e.Message);
                             Console.ReadKey();
@@ -100,6 +96,40 @@ namespace IndividualProject
                         
                         
                         break;
+                    case 8:
+                        try
+                        {
+                            SAdmin.ViewUsersMessages();
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                            Console.ReadKey();
+                        }
+                        break;
+                    case 9:
+                        try
+                        {
+                            SAdmin.EditMessage(name);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                            Console.ReadKey();
+                        }
+                        break;
+                    case 10:
+                        try
+                        {
+                            SAdmin.DeleteMessages(name);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                            Console.ReadKey();
+                        }
+                        break;
+
                     case 0:
                     default:
                         Console.WriteLine("\nLogged out");

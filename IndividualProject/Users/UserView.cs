@@ -7,7 +7,7 @@ namespace IndividualProject
         
         public UserView()
         {            
-            UserList = UserEnum.userview;
+            Role = UserRole.Userview;
         }
         public override int UserMenu()
         {
@@ -20,7 +20,7 @@ namespace IndividualProject
             Console.WriteLine("1.Send a Message");
             Console.WriteLine("2.View your Messages");
             Console.WriteLine("3.View transacted message between 2 users");
-            Console.ForegroundColor = ConsoleColor.DarkGray;
+            //Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("\n0.Log Out");
             Console.ResetColor();
             int answer;

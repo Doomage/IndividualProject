@@ -1,13 +1,13 @@
 ﻿
 namespace IndividualProject
 {
-    public enum UserEnum {user = 1, userview = 2, userviewedit = 3, uservieweditdelete=4 ,superadmin = 5}
+    public enum UserRole {User = 1, Userview = 2, Userviewedit = 3, Uservieweditdelete=4 ,Superadmin = 5}
 
     abstract class AbstractUser
     {
         
         public string Name { get; set; }
-        public UserEnum UserList { get; set; }
+        public UserRole Role { get; set; }
        
     }
 

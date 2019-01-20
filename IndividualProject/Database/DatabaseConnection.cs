@@ -94,7 +94,7 @@ namespace IndividualProject
                 
             }
         }
-        public static bool ValidateAccount(string name, string password)
+        public bool ValidateAccount(string name, string password)
         {
             var dbcon = new SqlConnection(connectionstring);
 
@@ -120,7 +120,7 @@ namespace IndividualProject
             }
         }
 
-        public static bool ValidateUsername(string name)
+        public bool ValidateUsername(string name)
         {
             var dbcon = new SqlConnection(connectionstring);
             using (dbcon)
@@ -156,7 +156,7 @@ namespace IndividualProject
             }
         }
 
-        public static int SelectUserlevelByUsername(string name)
+        public int SelectUserlevelByUsername(string name)
         {
             var dbcon = new SqlConnection(connectionstring);
             using (dbcon)
@@ -171,7 +171,7 @@ namespace IndividualProject
             }
         }
 
-        public static UserEnum GetUserAccess(string name, string password)
+        public UserRole GetUserAccess(string name, string password)
         {
             var dbcon = new SqlConnection(connectionstring);
             using (dbcon)
@@ -184,7 +184,7 @@ namespace IndividualProject
                 cmd.Parameters.AddWithValue("@Username", name);
                 cmd.Parameters.AddWithValue("@Password", password);
 
-                return (UserEnum)Convert.ToInt32(cmd.ExecuteScalar());  
+                return (UserRole)Convert.ToInt32(cmd.ExecuteScalar());  
 
             }
 
@@ -223,7 +223,7 @@ namespace IndividualProject
             }
         }
 
-        public static void UpdateMessages(string Message, int id)
+        public void UpdateMessages(string Message, int id)
         {
             var dbcon = new SqlConnection(connectionstring);
             using (dbcon)
@@ -343,7 +343,7 @@ namespace IndividualProject
 
         }
 
-        // einai gia ton user gia na vlepei ola ta messages to/from user
+        
         public List<Messages> ViewMessagesByName(string Sendername)
         {
             List<Messages> messages = new List<Messages>();
@@ -395,7 +395,7 @@ namespace IndividualProject
 
         }
 
-        public static string SelectMessageByID(int id)
+        public string SelectMessageByID(int id)
         {
             var dbcon = new SqlConnection(connectionstring);
             using (dbcon)
